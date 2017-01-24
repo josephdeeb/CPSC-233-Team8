@@ -1,0 +1,3 @@
+/*
+This class creates the JFrame object that all graphics are on
+*/
