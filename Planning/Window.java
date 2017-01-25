@@ -18,6 +18,6 @@ public class Window extends JFrame {
         // Sets window name
         setName(name);
         // Sets window title
-		setTitle(getName());
+	setTitle(getName());
     }
 }
