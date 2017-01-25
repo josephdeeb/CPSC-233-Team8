@@ -28,42 +28,43 @@ public class StartMenu {
 			
 			// If the input satisfies the conditions of being a single digit 
 			if ((inputLen == 1) && (isDigit == true)) {
-				switch (menuInput) {
-					
+				int finalInput = Integer.parseInt(menuInput);
+				
+				// checks for valid range of options
+				if ((finalInput > 4) || (finalInput == 0)) {
+					System.out.println("Incorrect Input! Enter a number between 1-4.");
+				} else {
+					switch (finalInput) {
+						
 					// Four cases associated with the four menu options
-					case "1":
-						System.out.println("Game Started");
-						isValid = true;
-						break;
-					case "2":
-						System.out.println("Settings");
-						isValid = true;
-						break;
-					case "3":
-						System.out.println("Instructions");
-						isValid = true;
-						break;
-					case "4":
-						System.out.println("Exit");
-						isValid = true;
-						break;
+						case 1:
+							System.out.println("Game Started");
+							isValid = true;
+							break;
+						case 2:
+							System.out.println("Settings");
+							isValid = true;
+							break;
+						case 3:
+							System.out.println("Instructions");
+							isValid = true;
+							break;
+						case 4:
+							System.out.println("Exit");
+							isValid = true;
+							break;
+					}
 				}
-			
 			}
 			
 			// If the input is not a single digit it lets the user know that they did not enter a correct value
 			// Re-promts for input after by the implementation of the while loop
 			else {
 				System.out.println("Incorrect Input! Try again!");
-		
+			}
 		}
-		
-		}
-		
-		}
-	
-	}
-
+	}	
+}
 			
 			
 									
