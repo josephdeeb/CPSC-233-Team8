@@ -17,5 +17,7 @@ public class Window extends JFrame {
         setVisible(true);
         // Sets window name
         setName(name);
+        // Sets window title
+		setTitle(getName());
     }
 }
