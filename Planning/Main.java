@@ -12,7 +12,7 @@ public class Main {
     
     public static final int DEFAULT_WINDOW_WIDTH = 500;
     public static final int DEFAULT_WINDOW_HEIGHT = 500;
-    public static final int DEFAULT_CElL_WIDTH = 10;
+    public static final int DEFAULT_CELL_WIDTH = 10;
     public static final int DEFAULT_CELL_HEIGHT = 10;
     public static final String DEFAULT_WINDOW_NAME = "T R O M";
     public static Cell[][] labels = new Cell[50][50];
