@@ -13,7 +13,7 @@ public class Cell extends JLabel {
         // Sets background color of cell to black
         setBackground(Color.BLACK);
         // Sets border color to yellow
-        setBorder(BorderFactory.createLineBorder(Color.yellow));
+        setBorder(BorderFactory.createLineBorder(Color.red));
         // Makes the cell opaque (shows color)
         setOpaque(true);
     }
