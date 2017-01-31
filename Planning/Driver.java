@@ -14,6 +14,7 @@ public class Driver {
         initialize(x, y, color);
     }
     
+    // Initializes the x, y location, and color, of the driver.
     public static void initialize(int x, int y, Color color) {
         
         xCoordinate = x;
@@ -21,10 +22,13 @@ public class Driver {
         playerColor = color;
     }
     
+    // Actually draws the drivers start position on the board.
     public static void start() {
         
         Main.labels[xCoordinate][yCoordinate].colorUpdate(playerColor);
     }
+    
+    // The movement function
     public static void move() {
         
         int newX = 0, newY = 0;
@@ -32,42 +36,43 @@ public class Driver {
         String reversed = reverseDirection(oldDirection);
         
         
+        // If the new direction is the reverse of the current direction, ignore the input
         if (direction.equals(reversed)) {
             
             direction = oldDirection;
         }
-
-            switch (direction) {
-            
-            case "up":
-                newY = (oldY - 1);
-                newX = oldX;
-                break;
-            case "right":
-                newX = (oldX + 1);
-                newY = oldY;
-                break;
-            case "down":
-                newY = (oldY + 1);
-                newX = oldX;
-                break;
-            case "left":
-                newX = (oldX - 1);
-                newY = oldY;
-                break;
-            default:
-                System.out.println("ERROR: NO DIRECTION IN DRIVER");
-                break;
-            }
         
-        Color nextColor = Color.YELLOW;
+        // Creates the new coordinates that the driver is moving to based on direction.
+        switch (direction) {
+        
+        case "up":
+            newY = (oldY - 1);
+            newX = oldX;
+            break;
+        case "right":
+            newX = (oldX + 1);
+            newY = oldY;
+            break;
+        case "down":
+            newY = (oldY + 1);
+            newX = oldX;
+            break;
+        case "left":
+            newX = (oldX - 1);
+            newY = oldY;
+            break;
+        default:
+            System.out.println("ERROR: NO DIRECTION IN switch (direction) IN DRIVER move()");
+            break;
+        }
+        
+        Color nextColor = playerColor;
         
         try {
             
             nextColor = Main.labels[newX][newY].getColor();
         }
         catch (Exception IndexOutOfBounds) {}
-        finally {}
         
         if (nextColor.equals(Color.BLACK)) {
             xCoordinate = newX;
@@ -79,8 +84,12 @@ public class Driver {
             
             // This means that the next space is not black.
             // Should destroy driver
+            Main.gameGoing = false;
         }
     }
+    
+    // Mostly ignorable function, just takes a string as input and returns the opposite direction as the input.
+    // Just used to prevent pressing backwards and dying.
     public static String reverseDirection(String dir) {
         String reversed = "";
         

@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 
@@ -24,6 +23,7 @@ public class Main {
     public static final String DEFAULT_WINDOW_NAME = "T R O M";
     public static Cell[][] labels = new Cell[50][50];
     public static Driver driver = new Driver(5, 5, Color.YELLOW);
+    public static boolean gameGoing = true;
 
     public static void main(String[] args) {
 
@@ -62,9 +62,9 @@ public class Main {
 
         // Makes the window visible
         window.setVisible(true);
-        boolean gameGoing = true;
+        gameGoing = true;
         driver.start();
-        while (gameGoing = true) {
+        while (gameGoing == true) {
             
             driver.move();
             game.repaint();
