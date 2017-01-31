@@ -11,6 +11,24 @@ import java.lang.Thread;
 
 import java.util.Random;
 
+
+/*
+ * 
+ * TO DO LIST:
+ *      Make multiple players work!
+ *      Steps:
+ *          1) Turn driver into an array of Driver objects of size four instead of a single driver object
+ *          2) Turn each reference to driver into a for loop where it iterates over the array of Driver objects and
+ *             does the original thing but to each object.
+ *          3) Change how the game loop works so that you can kill one driver without killing them all.
+ *             (This step will involve modifying the final else statement in Driver.move)
+ *      
+ *      Start screen
+ *          1) Just make a separate class file that is the title screen, and then call Main when you want the game to start.
+ *          2) Make Main take the amount of players and any other options passed from the title screen as arguments when it's called.
+ *      
+ */
+
 public class Main {
 
     public static int x = 0;
@@ -62,8 +80,14 @@ public class Main {
 
         // Makes the window visible
         window.setVisible(true);
+        
         gameGoing = true;
+        
+        // Draws the initial position of the driver
         driver.start();
+        
+        // Main game loop
+        // Runs the drivers move function, then repaints the board, then stops for one hundred milliseconds.
         while (gameGoing == true) {
             
             driver.move();
