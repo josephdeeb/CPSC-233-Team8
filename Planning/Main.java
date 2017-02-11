@@ -4,30 +4,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 
 import java.lang.Thread;
 
 import java.util.Random;
-
-
-/*
- * 
- * TO DO LIST:
- *      Make multiple players work!
- *      Steps:
- *          1) Turn driver into an array of Driver objects of size four instead of a single driver object
- *          2) Turn each reference to driver into a for loop where it iterates over the array of Driver objects and
- *             does the original thing but to each object.
- *          3) Change how the game loop works so that you can kill one driver without killing them all.
- *             (This step will involve modifying the final else statement in Driver.move)
- *      
- *      Start screen
- *          1) Just make a separate class file that is the title screen, and then call Main when you want the game to start.
- *          2) Make Main take the amount of players and any other options passed from the title screen as arguments when it's called.
- *      
- */
 
 public class Main {
 
@@ -80,20 +63,16 @@ public class Main {
 
         // Makes the window visible
         window.setVisible(true);
-        
-        gameGoing = true;
-        
-        // Draws the initial position of the driver
+
         driver.start();
-        
-        // Main game loop
-        // Runs the drivers move function, then repaints the board, then stops for one hundred milliseconds.
         while (gameGoing == true) {
             
             driver.move();
             game.repaint();
             stop(100);
         }
+        game(13, 17);
+        over(13, 25);
         
     }
     // This method uses code copied from http://stackoverflow.com/questions/24104313/how-to-delay-in-java by Ann Ragg
@@ -104,5 +83,70 @@ public class Main {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+    }
+    public static void drawLine(int xInit, int xFinal, int yInit, int yFinal, Color color) {
+        for (int y = yInit; y <= yFinal; y++) {
+            for (int x = xInit; x <= xFinal; x++) {
+                labels[x][y].colorUpdate(color);
+            }
+        }
+    }
+    
+    public static void game(int x, int y) {
+        
+        // G
+        drawLine(x+1, x+3, y, y, Color.YELLOW);
+        drawLine(x, x, y+1, y+5, Color.YELLOW);
+        drawLine(x+1, x+4, y+6, y+6, Color.YELLOW);
+        drawLine(x+4, x+4, y+3, y+5, Color.YELLOW);
+        drawLine(x+2, x+4, y+3, y+3, Color.YELLOW);
+        labels[x+4][y+1].colorUpdate(Color.YELLOW);
+        // A
+        drawLine(x+6, x+6, y+1, y+6, Color.YELLOW);
+        drawLine(x+10, x+10, y+1, y+6, Color.YELLOW);
+        drawLine(x+7, x+9, y, y, Color.YELLOW);
+        drawLine(x+7, x+9, y+3, y+3, Color.YELLOW);
+        // M
+        drawLine(x+12, x+12, y, y+6, Color.YELLOW);
+        drawLine(x+16, x+16, y, y+6, Color.YELLOW);
+        drawLine(x+14, x+14, y+1, y+3, Color.YELLOW);
+        labels[x+13][y].colorUpdate(Color.YELLOW);
+        labels[x+15][y].colorUpdate(Color.YELLOW);
+        // E
+        drawLine(x+18, x+18, y, y+6, Color.YELLOW);
+        drawLine(x+18, x+22, y, y, Color.YELLOW);
+        drawLine(x+18, x+21, y+3, y+3, Color.YELLOW);
+        drawLine(x+18, x+22, y+6, y+6, Color.YELLOW);
+    }
+    
+    public static void over(int x, int y) {
+        // O
+        drawLine(x+1, x+3, y, y, Color.YELLOW);
+        drawLine(x, x, y+1, y+5, Color.YELLOW);
+        drawLine(x+1, x+3, y+6, y+6, Color.YELLOW);
+        drawLine(x+4, x+4, y+1, y+5, Color.YELLOW);
+        // V
+        drawLine(x+6, x+6, y, y+4, Color.YELLOW);
+        drawLine(x+10, x+10, y, y+4, Color.YELLOW);
+        labels[x+7][y+5].colorUpdate(Color.YELLOW);
+        labels[x+8][y+6].colorUpdate(Color.YELLOW);
+        labels[x+9][y+5].colorUpdate(Color.YELLOW);
+        // E
+        drawLine(x+12, x+12, y, y+6, Color.YELLOW);
+        drawLine(x+12, x+16, y, y, Color.YELLOW);
+        drawLine(x+12, x+15, y+3, y+3, Color.YELLOW);
+        drawLine(x+12, x+16, y+6, y+6, Color.YELLOW);
+        // R
+        drawLine(x+18, x+18, y, y+6, Color.YELLOW);
+        drawLine(x+18, x+21, y, y, Color.YELLOW);
+        drawLine(x+18, x+21, y+3, y+3, Color.YELLOW);
+        drawLine(x+22, x+22, y+1, y+2, Color.YELLOW);
+        labels[x+20][y+4].colorUpdate(Color.YELLOW);
+        labels[x+21][y+5].colorUpdate(Color.YELLOW);
+        labels[x+22][y+6].colorUpdate(Color.YELLOW);
+    }
+    
+    public static void stopGame() {
+        gameGoing = false;
     }
 }
