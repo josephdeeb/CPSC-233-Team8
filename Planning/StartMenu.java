@@ -17,7 +17,10 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 
 public class StartMenu{
+	
 	public static boolean gameGoing = false;
+	
+	public static boolean timer = true;
 
     public static void run(){
 	   
@@ -92,6 +95,7 @@ public class StartMenu{
             public void actionPerformed(ActionEvent e){
         System.out.println("START clicked");
         gameGoing = true;
+		timer = false;
 		startPlaying(gameGoing, frame);
         }
 });
@@ -114,7 +118,7 @@ public class StartMenu{
     
             public void actionPerformed(ActionEvent e){
         System.out.println("EXIT clicked");
-        frame.dispose();
+		timer = false;
 		gameGoing = false;
 		startPlaying(gameGoing, frame);
         }
@@ -127,3 +131,4 @@ public class StartMenu{
 	
 		}     
 }
+
