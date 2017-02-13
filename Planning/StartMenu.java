@@ -23,15 +23,15 @@ public class StartMenu{
 	public static boolean timer = true;
 
     public static void run(){
-	   
+	    //START OF CREATING THE FRAME
         JFrame frame = new JFrame("T R O M");
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         frame.setSize(500, 500);
         
-        frame.getContentPane().setBackground(Color.BLACK);
-		
+        frame.getContentPane().setBackground(Color.BLACK); //END OF CREATING THE FRAME
+		//START OF CREATING "START" BUTTON 
 		JButton start = new JButton();
 		
 		start.setBounds(175, 50, 100, 50);
@@ -40,8 +40,8 @@ public class StartMenu{
 		
 		start.setText("START");
         
-        start.setBackground(Color.WHITE);
-        
+        start.setBackground(Color.WHITE); //END OF THE CREATING "START" BUTTON
+        //START OF CREATING "SETTINGS" BUTTON
         JButton settings = new JButton();
         
         settings.setBounds(175, 125, 100, 50);
@@ -50,14 +50,8 @@ public class StartMenu{
         
         settings.setBackground(Color.WHITE);
         
-        settings.setVisible(true);
-        
-        frame.add(start);
-        
-        frame.add(settings);
-		
-		JLabel img = new JLabel(new ImageIcon("C:\\Users\\Denis\\Desktop\\i.gif"));
-		
+        settings.setVisible(true); //END OF CREATING "SETTINGS" BUTTON
+		//START OF CREATING "CREDITS" BUTTON
 		JButton credits = new JButton();
         
         credits.setBounds(175, 200, 100, 50);
@@ -66,10 +60,8 @@ public class StartMenu{
         
         credits.setBackground(Color.WHITE);
         
-        credits.setVisible(true);
-        
-        frame.add(credits);
-		
+        credits.setVisible(true);//END OF CREATING "CREDITS" BUTTON
+        //START OF CREATING "EXIT" BUTTON
 		JButton exit = new JButton();
         
         exit.setBounds(175, 275, 100, 50);
@@ -78,18 +70,24 @@ public class StartMenu{
         
         exit.setBackground(Color.WHITE);
         
-        exit.setVisible(true);
+        exit.setVisible(true); //END OF CREATING "EXIT" BUTTON
+		//SETTING UP BACKGROND GIF
+		JLabel img = new JLabel(new ImageIcon("C:\\Users\\Denis\\Desktop\\i.gif"));
+		
+		img.setLocation(0,0);
+		//ADDING ALL THE CREATED COMPONENTS TO THE FRAME AND SETTING IT VISIBLE
+		frame.add(start);
+		
+		frame.add(settings);
 		
 		frame.add(exit);
         
         frame.add(credits);
-		
-		img.setLocation(0,0);
         
         frame.add(img);
 		
 		frame.setVisible(true);
-		
+		// ADDING ACTION TO "START" BUTTON WHICH SETS gameGoing TO TRUE AND TIMER TO FALSE
         start.addActionListener( new ActionListener(){
     
             public void actionPerformed(ActionEvent e){
@@ -113,7 +111,7 @@ public class StartMenu{
         System.out.println("credits clicked");
         }
 });
-
+        //ADDING ACTION TO "EXIT" BUTTON WHICH SETS gameGoing TO FALSE AND TIMER TO FALSE
         exit.addActionListener( new ActionListener(){
     
             public void actionPerformed(ActionEvent e){
@@ -125,10 +123,10 @@ public class StartMenu{
 });
 
     }
+	//METHOD THAT DISPOSES OF THE TITTLE SCREEN FRAME AND RETURNS gameGoing VARIABLE
 	public static boolean startPlaying(boolean gameGoing, JFrame frame){
 	frame.dispose();
 	return gameGoing;
 	
 		}     
 }
-
