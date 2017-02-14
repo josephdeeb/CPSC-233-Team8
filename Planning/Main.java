@@ -24,13 +24,26 @@ public class Main {
     public static final String DEFAULT_WINDOW_NAME = "T R O M";
     public static Cell[][] labels = new Cell[50][50];
     public static Driver driver = new Driver(5, 5, Color.YELLOW);
-    public static boolean gameGoing = true;
+    public static StartMenu gameGoing = new StartMenu();
 
     public static void main(String[] args) {
+		gameGoing.run();
+		while (gameGoing.timer) {
+			stop(100);
 
-        initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+        }
+        
+        if (gameGoing.gameGoing == true){
+			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+		}
+		else{
+			finished();
+			
+        }
     }
-
+	public static void finished(){
+		System.out.println("Game is finished");
+	}
     public static void initializeGame(int w, int h, String name) {
         
         // JFrame window
@@ -65,7 +78,7 @@ public class Main {
         window.setVisible(true);
 
         driver.start();
-        while (gameGoing == true) {
+        while (gameGoing.gameGoing == true) {
             
             driver.move();
             game.repaint();
@@ -155,6 +168,6 @@ public class Main {
     }
     
     public static void stopGame() {
-        gameGoing = false;
+        gameGoing.gameGoing = false;
     }
 }
