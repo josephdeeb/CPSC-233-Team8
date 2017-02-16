@@ -6,8 +6,9 @@ public class Driver {
     public int xCoordinate = 0;
     public int yCoordinate = 0;
     private static String DEFAULT_DIRECTION = "down";
+    private boolean alive = true;
     public String direction = "down";
-    public String oldDirection = "down";
+    public String oldDirection = "";
     public Color playerColor = Color.YELLOW;
     
     public Driver(int x, int y, Color color) {
@@ -80,9 +81,13 @@ public class Driver {
             
             // stops the main game loop
             // for multiple players, should make only the current driver stop
-            Main.stopGame();
+            alive = false;
         }
     }
+    public boolean getAlive() {
+        return alive;
+    }
+    
     public static String reverseDirection(String dir) {
         String reversed = "";
         
@@ -94,8 +99,6 @@ public class Driver {
             reversed = "left";
         else if (dir.equals("left"))
             reversed = "right";
-        else
-            System.out.println("ERROR: NO VALID DIRECTION GIVEN IN reverseDirection");
         return reversed;
     }
 }

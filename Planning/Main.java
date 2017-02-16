@@ -55,13 +55,13 @@ public class Main {
         drivers = new Driver[players];
         for (int i = 0; i < players; i++) {
             if (i == 0)
-                drivers[i] = new Driver(1, 1, Color.YELLOW, "down");
+                drivers[i] = new Driver(5, 5, Color.YELLOW, "down");
             else if (i == 1)
-                drivers[i] = new Driver(48, 1, Color.RED, "left");
+                drivers[i] = new Driver(44, 5, Color.RED, "left");
             else if (i == 2)
-                drivers[i] = new Driver(48, 48, Color.CYAN, "right");
+                drivers[i] = new Driver(44, 44, Color.CYAN, "up");
             else if (i == 3)
-                drivers[i] = new Driver(1, 48, Color.MAGENTA, "up");
+                drivers[i] = new Driver(5, 44, Color.MAGENTA, "right");
         }
         // JFrame window
         Window window = new Window(w, h, name);
@@ -96,9 +96,10 @@ public class Main {
 
         driver.start();
         while (gameGoing.gameGoing == true) {
-            
+            int dead = 0;
             for (int i = 0; i < players; i++) {
-                drivers[i].move();
+                if (drivers[i].getAlive() == true)
+                    drivers[i].move();
             }
             game.repaint();
             stop(100);
@@ -125,6 +126,7 @@ public class Main {
         }
     }
 	
+    // P.S this ain't needed, draw line works for boxes if you specify the right coordinates
 	public static void drawBox(int x, int y){
 		//starting x: 11 starting y: 15
 		for(int a=y;a<34;a++){

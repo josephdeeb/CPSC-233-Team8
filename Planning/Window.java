@@ -11,24 +11,94 @@ public class Window extends JFrame {
         // Uses the key listener and key events to move the object on the grid
         this.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
+                // PLAYER 1
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     try {
                         Main.drivers[0].direction = "right";
                     }
-                    catch {}
+                    catch(ArrayIndexOutOfBoundsException exception) {}
 
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    Main.drivers[].direction = "left";
+                    try {
+                        Main.drivers[0].direction = "left";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    Main.driver.direction = "down";
+                    try {
+                        Main.drivers[0].direction = "down";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    Main.driver.direction = "up";
+                    try {
+                        Main.drivers[0].direction = "up";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+                }
+                
+                // PLAYER 2
+                else if (e.getKeyCode() == KeyEvent.VK_D) {
+                    try {
+                        Main.drivers[1].direction = "right";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+
+                }
+
+                else if (e.getKeyCode() == KeyEvent.VK_A) {
+                    try {
+                        Main.drivers[1].direction = "left";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+                }
+
+                else if (e.getKeyCode() == KeyEvent.VK_S) {
+                    try {
+                        Main.drivers[1].direction = "down";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+                }
+
+                else if (e.getKeyCode() == KeyEvent.VK_W) {
+                    try {
+                        Main.drivers[1].direction = "up";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+                }
+                
+                // PLAYER 3
+                else if (e.getKeyCode() == KeyEvent.VK_K) {
+                    try {
+                        Main.drivers[2].direction = "right";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+
+                }
+
+                else if (e.getKeyCode() == KeyEvent.VK_H) {
+                    try {
+                        Main.drivers[2].direction = "left";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+                }
+
+                else if (e.getKeyCode() == KeyEvent.VK_J) {
+                    try {
+                        Main.drivers[2].direction = "down";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
+                }
+
+                else if (e.getKeyCode() == KeyEvent.VK_U) {
+                    try {
+                        Main.drivers[2].direction = "up";
+                    }
+                    catch(ArrayIndexOutOfBoundsException exception) {}
                 }
             }
 

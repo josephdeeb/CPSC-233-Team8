@@ -17,7 +17,7 @@ public class Cell extends JLabel {
         colorUpdate(Color.BLACK);
 
         // Sets border color to yellow
-        setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        //setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         // Makes the cell opaque (shows color)
         setOpaque(true);
