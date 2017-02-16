@@ -21,9 +21,11 @@ public class Main {
     public static final int DEFAULT_WINDOW_HEIGHT = 500;
     public static final int DEFAULT_CELL_WIDTH = 10;
     public static final int DEFAULT_CELL_HEIGHT = 10;
+    public static final int DEFAULT_PLAYERS = 1;
     public static final String DEFAULT_WINDOW_NAME = "T R O M";
     public static Cell[][] labels = new Cell[50][50];
     public static Driver driver = new Driver(5, 5, Color.YELLOW);
+    public static Driver[] drivers;
     public static StartMenu gameGoing = new StartMenu();
 
     public static void main(String[] args) {
@@ -34,7 +36,7 @@ public class Main {
         }
         
         if (gameGoing.gameGoing == true){
-			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME, 4);
 		}
 		else{
 			finished();
@@ -44,8 +46,23 @@ public class Main {
 	public static void finished(){
 		System.out.println("Game is finished");
 	}
-    public static void initializeGame(int w, int h, String name) {
+    public static void initializeGame(int w, int h, String name, int players) {
         
+        if (players > 4)
+            players = 4;
+        else if (players < 1)
+            players = 1;
+        drivers = new Driver[players];
+        for (int i = 0; i < players; i++) {
+            if (i == 0)
+                drivers[i] = new Driver(1, 1, Color.YELLOW, "down");
+            else if (i == 1)
+                drivers[i] = new Driver(48, 1, Color.RED, "left");
+            else if (i == 2)
+                drivers[i] = new Driver(48, 48, Color.CYAN, "right");
+            else if (i == 3)
+                drivers[i] = new Driver(1, 48, Color.MAGENTA, "up");
+        }
         // JFrame window
         Window window = new Window(w, h, name);
 
@@ -80,7 +97,9 @@ public class Main {
         driver.start();
         while (gameGoing.gameGoing == true) {
             
-            driver.move();
+            for (int i = 0; i < players; i++) {
+                drivers[i].move();
+            }
             game.repaint();
             stop(100);
         }

@@ -3,29 +3,30 @@ import java.awt.Color;
 
 public class Driver {
     
-    public static int xCoordinate = 0;
-    public static int yCoordinate = 0;
-    public static String direction = "down";
-    public static String oldDirection = "down";
-    public static Color playerColor = Color.YELLOW;
+    public int xCoordinate = 0;
+    public int yCoordinate = 0;
+    private static String DEFAULT_DIRECTION = "down";
+    public String direction = "down";
+    public String oldDirection = "down";
+    public Color playerColor = Color.YELLOW;
     
     public Driver(int x, int y, Color color) {
-        
-        initialize(x, y, color);
+        this(x, y, color, DEFAULT_DIRECTION);
     }
     
-    public static void initialize(int x, int y, Color color) {
-        
+    public Driver(int x, int y, Color color, String initDirection) {
         xCoordinate = x;
         yCoordinate = y;
         playerColor = color;
+        direction = initDirection;
     }
     
-    public static void start() {
+    
+    public void start() {
         
         Main.labels[xCoordinate][yCoordinate].colorUpdate(playerColor);
     }
-    public static void move() {
+    public void move() {
         
         int newX = 0, newY = 0;
         int oldX = xCoordinate, oldY = yCoordinate;

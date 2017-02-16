@@ -12,11 +12,15 @@ public class Window extends JFrame {
         this.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    Main.driver.direction = "right";
+                    try {
+                        Main.drivers[0].direction = "right";
+                    }
+                    catch {}
+
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    Main.driver.direction = "left";
+                    Main.drivers[].direction = "left";
                 }
 
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
