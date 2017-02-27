@@ -3,13 +3,13 @@ import java.awt.Color;
 
 public class Driver {
     
-    public int xCoordinate = 0;
-    public int yCoordinate = 0;
+    private int xCoordinate = 0;
+    private int yCoordinate = 0;
     private static String DEFAULT_DIRECTION = "down";
     private boolean alive = true;
-    public String direction = "down";
-    public String oldDirection = "";
-    public Color playerColor = Color.YELLOW;
+    private String direction = "down";
+    private String oldDirection = "";
+    private Color playerColor = Color.YELLOW;
     
     public Driver(int x, int y, Color color) {
         this(x, y, color, DEFAULT_DIRECTION);
@@ -23,11 +23,11 @@ public class Driver {
     }
     
     
-    public void start() {
+    private void start() {
         
         Main.labels[xCoordinate][yCoordinate].colorUpdate(playerColor);
     }
-    public void move() {
+    private void move() {
         
         int newX = 0, newY = 0;
         int oldX = xCoordinate, oldY = yCoordinate;
@@ -88,7 +88,7 @@ public class Driver {
         return alive;
     }
     
-    public static String reverseDirection(String dir) {
+    private static String reverseDirection(String dir) {
         String reversed = "";
         
         if (dir.equals("up"))
