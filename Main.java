@@ -14,6 +14,8 @@ import java.util.Random;
 
 public class Main {
 
+    // MAKE LESS STUFF STATIC
+    
     private static int x = 0;
     private static int y = 0;
 
@@ -23,8 +25,10 @@ public class Main {
     private static final int DEFAULT_CELL_HEIGHT = 10;
     private static final int DEFAULT_PLAYERS = 1;
     private static final String DEFAULT_WINDOW_NAME = "T R O M";
+    // MAKE PRIVATE
     public static Cell[][] labels = new Cell[50][50];
     private static Driver driver = new Driver(5, 5, Color.YELLOW);
+    // MAKE PRIVATE
     public static Driver[] drivers;
     private static StartMenu gameGoing = new StartMenu();
 
@@ -46,6 +50,7 @@ public class Main {
 	private static void finished(){
 		System.out.println("Game is finished");
 	}
+	
     private static void initializeGame(int w, int h, String name, int players) {
         
         if (players > 4)

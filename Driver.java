@@ -7,7 +7,7 @@ public class Driver {
     private int yCoordinate = 0;
     private static String DEFAULT_DIRECTION = "down";
     private boolean alive = true;
-    public String direction = "down";
+    private String direction = "down";
     private String oldDirection = "";
     private Color playerColor = Color.YELLOW;
     
@@ -86,6 +86,15 @@ public class Driver {
     }
     public boolean getAlive() {
         return alive;
+    }
+    
+    public void setDirection(String setter) {
+        if ((setter == "up") || (setter == "down") || (setter == "left") || (setter == "right"))
+            direction = setter;
+    }
+    
+    public String getDirection() {
+        return direction;
     }
     
     private static String reverseDirection(String dir) {
