@@ -10,9 +10,9 @@ public class Window extends JFrame {
 
         // Uses the key listener and key events to move the object on the grid
         this.addKeyListener(new KeyListener() {
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(KeyEvent key) {
                 // PLAYER 1
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                if (key.getKeyCode() == KeyEvent.VK_RIGHT) {
                     try {
                         Main.drivers[0].direction = "right";
                     }
@@ -20,21 +20,21 @@ public class Window extends JFrame {
 
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                else if (key.getKeyCode() == KeyEvent.VK_LEFT) {
                     try {
                         Main.drivers[0].direction = "left";
                     }
                     catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                else if (key.getKeyCode() == KeyEvent.VK_DOWN) {
                     try {
                         Main.drivers[0].direction = "down";
                     }
                     catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                else if (key.getKeyCode() == KeyEvent.VK_UP) {
                     try {
                         Main.drivers[0].direction = "up";
                     }
@@ -42,7 +42,7 @@ public class Window extends JFrame {
                 }
                 
                 // PLAYER 2
-                else if (e.getKeyCode() == KeyEvent.VK_D) {
+                else if (key.getKeyCode() == KeyEvent.VK_D) {
                     try {
                         Main.drivers[1].direction = "right";
                     }
@@ -50,21 +50,21 @@ public class Window extends JFrame {
 
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_A) {
+                else if (key.getKeyCode() == KeyEvent.VK_A) {
                     try {
                         Main.drivers[1].direction = "left";
                     }
                     catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_S) {
+                else if (key.getKeyCode() == KeyEvent.VK_S) {
                     try {
                         Main.drivers[1].direction = "down";
                     }
                     catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_W) {
+                else if (key.getKeyCode() == KeyEvent.VK_W) {
                     try {
                         Main.drivers[1].direction = "up";
                     }
@@ -72,7 +72,7 @@ public class Window extends JFrame {
                 }
                 
                 // PLAYER 3
-                else if (e.getKeyCode() == KeyEvent.VK_K) {
+                else if (key.getKeyCode() == KeyEvent.VK_K) {
                     try {
                         Main.drivers[2].direction = "right";
                     }
@@ -80,21 +80,21 @@ public class Window extends JFrame {
 
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_H) {
+                else if (key.getKeyCode() == KeyEvent.VK_H) {
                     try {
                         Main.drivers[2].direction = "left";
                     }
                     catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_J) {
+                else if (key.getKeyCode() == KeyEvent.VK_J) {
                     try {
                         Main.drivers[2].direction = "down";
                     }
                     catch(ArrayIndexOutOfBoundsException exception) {}
                 }
 
-                else if (e.getKeyCode() == KeyEvent.VK_U) {
+                else if (key.getKeyCode() == KeyEvent.VK_U) {
                     try {
                         Main.drivers[2].direction = "up";
                     }
