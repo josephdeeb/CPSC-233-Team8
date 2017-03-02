@@ -14,8 +14,6 @@ import java.util.Random;
 
 public class Main {
 
-    // MAKE LESS STUFF STATIC
-
     private static final int DEFAULT_WINDOW_WIDTH = 500;
     private static final int DEFAULT_WINDOW_HEIGHT = 500;
     private static final int DEFAULT_PLAYERS = 1;
@@ -32,7 +30,7 @@ public class Main {
         }
         
         if (startMenu.getGameGoing()){
-			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME, 4);
+			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME, 2);
 		}
 		else{
 			finished();
@@ -40,19 +38,41 @@ public class Main {
         }
     }
     
+    /**
+     * Prints "Game is finished".
+     */
 	private static void finished(){
 		System.out.println("Game is finished");
 	}
 	
+	/**
+	 * Returns a driver from the main drivers array.
+	 * 
+	 * @param num Index number of wanted driver
+	 * @return Returns driver from drivers[] array
+	 */
 	public static Driver getDriver(int num) {
-	    return drivers[num];
+	    try {
+	        return drivers[num];
+	    }
+	    catch (ArrayIndexOutOfBoundsException ex) {
+	        return drivers[0];
+	    }
+	    finally {}
 	}
 	
 	public static Cell getCell(int x, int y) {
 	    return labels[x][y];
 	}
 	
-	// initializes and runs game
+	/**
+	 * Initializes and runs game
+	 * 
+	 * @param w Width of the window
+	 * @param h Height of the window
+	 * @param name Name of the window
+	 * @param players Amount of players
+	 */
     private static void initializeGame(int w, int h, String name, int players) {
         
         if (players > 4)
@@ -93,7 +113,6 @@ public class Main {
         window.setVisible(true);
         int dead = 0;
         // main game loop
-        System.out.println("P1" + "\t\t| " + "P2" + "\t\t\t| " + "P3" + "\t\t\t| " + "P4");
         while (startMenu.getGameGoing()) {
             dead = 0;
             for (int i = 0; i < players; i++) {
@@ -103,10 +122,6 @@ public class Main {
                 else
                     dead++;
             }
-            System.out.println("(" + drivers[0].getXCoordinate() + ", " + drivers[0].getYCoordinate() + ")" + "\t\t| " +
-            "(" + drivers[1].getXCoordinate() + ", " + drivers[1].getYCoordinate() + ")" + "\t\t| " +
-            "(" + drivers[2].getXCoordinate() + ", " + drivers[2].getYCoordinate() + ")" + "\t\t| " +
-            "(" + drivers[3].getXCoordinate() + ", " + drivers[3].getYCoordinate() + ")");
             if (dead == (players - 1))
                 startMenu.setGameGoing(false);
             game.repaint();
@@ -127,6 +142,15 @@ public class Main {
         }
     }
     
+    /**
+     * Draws a line
+     * 
+     * @param xInit X coordinate start of the line (inclusive)
+     * @param xFinal X coordinate end of the line (inclusive)
+     * @param yInit Y coordinate start of the line (inclusive)
+     * @param yFinal Y coordinate end of the line (inclusive)
+     * @param color Color of the line
+     */
     private static void drawLine(int xInit, int xFinal, int yInit, int yFinal, Color color) {
         for (int y = yInit; y <= yFinal; y++) {
             for (int x = xInit; x <= xFinal; x++) {
@@ -143,7 +167,12 @@ public class Main {
 		}
 	}
     
-	// Prints GAME in the center
+	/**
+	 * Prints 'GAME' starting at the given x y coordinates
+	 * 
+	 * @param x The starting x coordinate
+	 * @param y The starting y coordinate
+	 */
     private static void game(int x, int y) {
         
         // G
@@ -171,7 +200,12 @@ public class Main {
         drawLine(x+18, x+22, y+6, y+6, Color.BLACK);
     }
     
-    // Prints OVER in the center
+    /**
+     * Prints 'OVER' starting at the given x y coordinates
+     * 
+     * @param x The starting x coordinate
+     * @param y The starting y coordinate
+     */
     private static void over(int x, int y) {
         // O
         drawLine(x+1, x+3, y, y, Color.BLACK);
@@ -199,6 +233,9 @@ public class Main {
         labels[x+22][y+6].colorUpdate(Color.BLACK);
     }
     
+    /**
+     * Sets the gameGoing loop to false.
+     */
     public static void stopGame() {
         startMenu.setGameGoing(false);
     }
