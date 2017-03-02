@@ -22,6 +22,11 @@ public class Main {
     private static Driver[] drivers;
     private static StartMenu startMenu = new StartMenu();
 
+    /**
+     * Main program function
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
 		startMenu.run();
 		while (startMenu.getTimer()) {
@@ -49,7 +54,7 @@ public class Main {
 	 * Returns a driver from the main drivers array.
 	 * 
 	 * @param num Index number of wanted driver
-	 * @return Returns driver from drivers[] array
+	 * @return Driver from drivers[] array
 	 */
 	public static Driver getDriver(int num) {
 	    try {
@@ -61,6 +66,13 @@ public class Main {
 	    finally {}
 	}
 	
+	/**
+	 * Returns a cell from the main cell array.
+	 * 
+	 * @param x X Coordinate of the wanted cell
+	 * @param y Y Coordinate of the wanted cell
+	 * @return Cell at (x,y) entry of labels array.
+	 */
 	public static Cell getCell(int x, int y) {
 	    return labels[x][y];
 	}
