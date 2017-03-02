@@ -15,31 +15,23 @@ import java.util.Random;
 public class Main {
 
     // MAKE LESS STUFF STATIC
-    
-    private static int x = 0;
-    private static int y = 0;
 
     private static final int DEFAULT_WINDOW_WIDTH = 500;
     private static final int DEFAULT_WINDOW_HEIGHT = 500;
-    private static final int DEFAULT_CELL_WIDTH = 10;
-    private static final int DEFAULT_CELL_HEIGHT = 10;
     private static final int DEFAULT_PLAYERS = 1;
     private static final String DEFAULT_WINDOW_NAME = "T R O M";
-    // MAKE PRIVATE
-    public static Cell[][] labels = new Cell[50][50];
-    private static Driver driver = new Driver(5, 5, Color.YELLOW);
-    // MAKE PRIVATE
-    public static Driver[] drivers;
-    private static StartMenu gameGoing = new StartMenu();
+    private static Cell[][] labels = new Cell[50][50];
+    private static Driver[] drivers;
+    private static StartMenu startMenu = new StartMenu();
 
     public static void main(String[] args) {
-		gameGoing.run();
-		while (gameGoing.getTimer()) {
+		startMenu.run();
+		while (startMenu.getTimer()) {
 			stop(100);
 
         }
         
-        if (gameGoing.getGameGoing()){
+        if (startMenu.getGameGoing()){
 			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME, 4);
 		}
 		else{
@@ -47,10 +39,20 @@ public class Main {
 			
         }
     }
+    
 	private static void finished(){
 		System.out.println("Game is finished");
 	}
 	
+	public static Driver getDriver(int num) {
+	    return drivers[num];
+	}
+	
+	public static Cell getCell(int x, int y) {
+	    return labels[x][y];
+	}
+	
+	// initializes and runs game
     private static void initializeGame(int w, int h, String name, int players) {
         
         if (players > 4)
@@ -74,6 +76,8 @@ public class Main {
         JPanel game = new JPanel(new GridLayout(50, 50));
 
         // Loop that assigns cells to 2d array entries
+        int x = 0;
+        int y = 0;
         while (y < 50) {
             x = 0;
             while (x < 50) {
@@ -87,15 +91,26 @@ public class Main {
         game.setVisible(true);
         window.getContentPane().add(game);
         window.setVisible(true);
-
-        while (gameGoing.getGameGoing()) {
-            int dead = 0;
+        int dead = 0;
+        // main game loop
+        System.out.println("P1" + "\t\t| " + "P2" + "\t\t\t| " + "P3" + "\t\t\t| " + "P4");
+        while (startMenu.getGameGoing()) {
+            dead = 0;
             for (int i = 0; i < players; i++) {
-                if (drivers[i].getAlive() == true)
+                if (drivers[i].getAlive() == true) {
                     drivers[i].move();
+                }
+                else
+                    dead++;
             }
+            System.out.println("(" + drivers[0].getXCoordinate() + ", " + drivers[0].getYCoordinate() + ")" + "\t\t| " +
+            "(" + drivers[1].getXCoordinate() + ", " + drivers[1].getYCoordinate() + ")" + "\t\t| " +
+            "(" + drivers[2].getXCoordinate() + ", " + drivers[2].getYCoordinate() + ")" + "\t\t| " +
+            "(" + drivers[3].getXCoordinate() + ", " + drivers[3].getYCoordinate() + ")");
+            if (dead == (players - 1))
+                startMenu.setGameGoing(false);
             game.repaint();
-            stop(1);
+            stop(75);
         }
 		drawBox(11,15);
         game(13, 17);
@@ -111,6 +126,7 @@ public class Main {
             Thread.currentThread().interrupt();
         }
     }
+    
     private static void drawLine(int xInit, int xFinal, int yInit, int yFinal, Color color) {
         for (int y = yInit; y <= yFinal; y++) {
             for (int x = xInit; x <= xFinal; x++) {
@@ -127,6 +143,7 @@ public class Main {
 		}
 	}
     
+	// Prints GAME in the center
     private static void game(int x, int y) {
         
         // G
@@ -154,6 +171,7 @@ public class Main {
         drawLine(x+18, x+22, y+6, y+6, Color.BLACK);
     }
     
+    // Prints OVER in the center
     private static void over(int x, int y) {
         // O
         drawLine(x+1, x+3, y, y, Color.BLACK);
@@ -182,6 +200,6 @@ public class Main {
     }
     
     public static void stopGame() {
-        gameGoing.setGameGoing(false);
+        startMenu.setGameGoing(false);
     }
 }

@@ -84,7 +84,7 @@ public class StartMenu{
         
         exit.setVisible(true); //END OF CREATING "EXIT" BUTTON
 		//SETTING UP BACKGROND GIF
-		JLabel img = new JLabel(new ImageIcon("C:\\Users\\Denis\\Desktop\\i.gif"));
+		JLabel img = new JLabel(new ImageIcon("i.gif"));
 		
 		img.setLocation(0,0);
 		//ADDING ALL THE CREATED COMPONENTS TO THE FRAME AND SETTING IT VISIBLE

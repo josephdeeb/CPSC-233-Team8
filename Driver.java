@@ -25,8 +25,17 @@ public class Driver {
     
     public void start() {
         
-        Main.labels[xCoordinate][yCoordinate].colorUpdate(playerColor);
+        Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
     }
+    
+    public int getXCoordinate() {
+        return xCoordinate;
+    }
+    
+    public int getYCoordinate() {
+        return yCoordinate;
+    }
+    
     public void move() {
         
         int newX = 0, newY = 0;
@@ -66,7 +75,7 @@ public class Driver {
         
         try {
             
-            nextColor = Main.labels[newX][newY].getColor();
+            nextColor = Main.getCell(newX, newY).getColor();
         }
         catch (Exception IndexOutOfBounds) {}
         finally {}
@@ -75,12 +84,10 @@ public class Driver {
             xCoordinate = newX;
             yCoordinate = newY;
             oldDirection = direction;
-            Main.labels[xCoordinate][yCoordinate].colorUpdate(playerColor);
+            Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
         }
         else {
             
-            // stops the main game loop
-            // for multiple players, should make only the current driver stop
             alive = false;
         }
     }
