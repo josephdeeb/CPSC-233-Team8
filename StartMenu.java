@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import java.awt.Color;
 
 import javax.swing.JFrame;
@@ -13,27 +11,42 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
 import java.awt.Image;
-
-import javax.imageio.ImageIO;
+/** 
+	 * @author Denis Shevchenko
+	 */
 
 public class StartMenu{
 	
 	private boolean gameGoing = false;
 	
 	private boolean timer = true;
-
+    
+/**
+	 * Getter method for gameGoing
+     *
+	 */
 	public boolean getGameGoing() {
 	    return gameGoing;
 	}
-	
+	/**
+	 * Setter method for gameGoing
+     @param setter to set gameGoing to false
+	 */
 	public void setGameGoing(boolean setter) {
 	    gameGoing = setter;
 	}
-	
+	/**
+	 * Getter method for timer
+	 */
 	public boolean getTimer() {
 	    return timer;
 	}
 	
+    /**
+	 * Initializes the start menu.
+	 * Creates all the buttons 
+	 */
+    
     public void run(){
 	    //START OF CREATING THE FRAME
         JFrame frame = new JFrame("T R O M");
@@ -106,7 +119,7 @@ public class StartMenu{
         System.out.println("START clicked");
         gameGoing = true;
 		timer = false;
-		startPlaying(gameGoing, frame);
+		frame.dispose();
         }
 });
 
@@ -130,15 +143,9 @@ public class StartMenu{
         System.out.println("EXIT clicked");
 		timer = false;
 		gameGoing = false;
-		startPlaying(gameGoing, frame);
+		frame.dispose();
         }
 });
 
     }
-	//METHOD THAT DISPOSES OF THE TITTLE SCREEN FRAME AND RETURNS gameGoing VARIABLE
-	public static boolean startPlaying(boolean gameGoing, JFrame frame){
-	frame.dispose();
-	return gameGoing;
-	
-		}     
 }
