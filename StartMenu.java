@@ -1,106 +1,131 @@
-import java.awt.Color;
-
-import javax.swing.JFrame;
-
+import java.awt.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.event.*;
-
-import javax.swing.JButton;
-
-import javax.swing.JLabel;
-
-import javax.swing.ImageIcon;
-
-import java.awt.Image;
-/** 
-	 * @author Denis Shevchenko
-	 */
 
 public class StartMenu{
 	
 	private boolean gameGoing = false;
 	
 	private boolean timer = true;
-    
-/**
-	 * Getter method for gameGoing
-     *
-	 */
+
 	public boolean getGameGoing() {
 	    return gameGoing;
 	}
-	/**
-	 * Setter method for gameGoing
-     @param setter to set gameGoing to false
-	 */
+	
 	public void setGameGoing(boolean setter) {
 	    gameGoing = setter;
 	}
-	/**
-	 * Getter method for timer
-	 */
+	
 	public boolean getTimer() {
 	    return timer;
 	}
 	
-    /**
-	 * Initializes the start menu.
-	 * Creates all the buttons 
-	 */
-    
     public void run(){
-	    //START OF CREATING THE FRAME
+	    
+        // Initialize JFrame
         JFrame frame = new JFrame("T R O M");
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        frame.setSize(500, 500);
+        frame.setSize(900, 900);
         
-        frame.getContentPane().setBackground(Color.BLACK); //END OF CREATING THE FRAME
-		//START OF CREATING "START" BUTTON 
-		JButton start = new JButton();
+        frame.getContentPane().setBackground(Color.BLACK); 
+        
+		// Create start button
 		
-		start.setBounds(175, 50, 100, 50);
+        JButton start = new JButton();
+        
+        Font font = new Font("Arial", Font.BOLD, 40);
+        
+        start.setFont(font);
+        
+        start.setBackground(Color.BLACK);
+        
+        start.setForeground(Color.CYAN);
+		
+        start.setBounds(350, 325, 200, 100);
+        
+        start.setFocusPainted(false);
+        
+        start.setBorderPainted(false);
 		
 		start.setVisible(true);
 		
-		start.setText("START");
+		start.setText("Start");
         
-        start.setBackground(Color.WHITE); //END OF THE CREATING "START" BUTTON
-        //START OF CREATING "SETTINGS" BUTTON
+        // Create settings button
+       
         JButton settings = new JButton();
         
-        settings.setBounds(175, 125, 100, 50);
+        settings.setFont(font);
         
-        settings.setText("Settings");
+        settings.setBackground(Color.BLACK);
         
-        settings.setBackground(Color.WHITE);
-        
-        settings.setVisible(true); //END OF CREATING "SETTINGS" BUTTON
-		//START OF CREATING "CREDITS" BUTTON
-		JButton credits = new JButton();
-        
-        credits.setBounds(175, 200, 100, 50);
-        
-        credits.setText("Credits");
-        
-        credits.setBackground(Color.WHITE);
-        
-        credits.setVisible(true);//END OF CREATING "CREDITS" BUTTON
-        //START OF CREATING "EXIT" BUTTON
-		JButton exit = new JButton();
-        
-        exit.setBounds(175, 275, 100, 50);
-        
-        exit.setText("EXIT");
-        
-        exit.setBackground(Color.WHITE);
-        
-        exit.setVisible(true); //END OF CREATING "EXIT" BUTTON
-		//SETTING UP BACKGROND GIF
-		JLabel img = new JLabel(new ImageIcon("i.gif"));
+        settings.setForeground(Color.YELLOW);
 		
-		img.setLocation(0,0);
-		//ADDING ALL THE CREATED COMPONENTS TO THE FRAME AND SETTING IT VISIBLE
+        settings.setBounds(350, 435, 200, 100);
+        
+        settings.setFocusPainted(false);
+        
+        settings.setBorderPainted(false);
+		
+		settings.setVisible(true);
+		
+		settings.setText("Settings");
+		
+        // Create credits button
+        
+        JButton credits = new JButton();
+        
+        credits.setFont(font);
+        
+        credits.setBackground(Color.BLACK);
+        
+        credits.setForeground(Color.MAGENTA);
+		
+        credits.setBounds(350, 550, 200, 100);
+        
+        credits.setFocusPainted(false);
+        
+        credits.setBorderPainted(false);
+		
+		credits.setVisible(true);
+		
+		credits.setText("Credits");
+       
+        credits.setVisible(true);
+        
+        // Create exit button
+        
+        JButton exit = new JButton();
+        
+        exit.setFont(font);
+        
+        exit.setBackground(Color.BLACK);
+        
+        exit.setForeground(Color.RED);
+		
+        exit.setBounds(350, 675, 200, 100);
+        
+        exit.setFocusPainted(false);
+        
+        exit.setBorderPainted(false);
+		
+		exit.setVisible(true);
+		
+		exit.setText("Exit");
+        
+		// Create JPanel and JLabel to add logo
+		
+        JPanel panel = (JPanel) frame.getContentPane();
+        panel.setLayout(null);
+        JLabel img = new JLabel(new ImageIcon("TROM.png"));
+        panel.add(img);
+        Dimension size = img.getMaximumSize();
+        img.setBounds(170, 100, size.width, size.height);
+       
+       // Adding all of the buttons to the JFrame
 		frame.add(start);
 		
 		frame.add(settings);
@@ -112,14 +137,15 @@ public class StartMenu{
         frame.add(img);
 		
 		frame.setVisible(true);
-		// ADDING ACTION TO "START" BUTTON WHICH SETS gameGoing TO TRUE AND TIMER TO FALSE
+		
+        // Adds action listen and switches game going and timer booleans to start the game
         start.addActionListener( new ActionListener(){
     
             public void actionPerformed(ActionEvent e){
         System.out.println("START clicked");
         gameGoing = true;
 		timer = false;
-		frame.dispose();
+		startPlaying(gameGoing, frame);
         }
 });
 
@@ -136,16 +162,22 @@ public class StartMenu{
         System.out.println("credits clicked");
         }
 });
-        //ADDING ACTION TO "EXIT" BUTTON WHICH SETS gameGoing TO FALSE AND TIMER TO FALSE
+        // Adds aciton listener to exit the game when exit is clicked
         exit.addActionListener( new ActionListener(){
     
             public void actionPerformed(ActionEvent e){
         System.out.println("EXIT clicked");
 		timer = false;
 		gameGoing = false;
-		frame.dispose();
+		startPlaying(gameGoing, frame);
         }
 });
 
     }
+	// Method that disposes of the title screen and calls gameGoing
+	public static boolean startPlaying(boolean gameGoing, JFrame frame){
+	frame.dispose();
+	return gameGoing;
+	
+		}     
 }
