@@ -3,6 +3,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.*;
 
+/** 
+ * This class creates a JFrame that displays the start
+ * menu and allows the user to start the game, go to settings
+ * see the credits or just exit the game.
+ */
 public class StartMenu{
 	
 	private boolean gameGoing = false;
@@ -13,14 +18,27 @@ public class StartMenu{
 	    return gameGoing;
 	}
 	
+    /**
+    * Setter method for gameGoing
+    *
+    * @param setter passes in setter for gameGoing
+    */
 	public void setGameGoing(boolean setter) {
 	    gameGoing = setter;
 	}
 	
-	public boolean getTimer() {
+    /**
+    * Getter for timer
+    */
+    public boolean getTimer() {
 	    return timer;
 	}
 	
+    /**
+     * Run class which creates every button and performs
+     * action intended for each button. Also generates the
+     * logo that is displayed at the top of the frame.
+     */
     public void run(){
 	    
         // Initialize JFrame
@@ -126,7 +144,8 @@ public class StartMenu{
         img.setBounds(170, 100, size.width, size.height);
        
        // Adding all of the buttons to the JFrame
-		frame.add(start);
+		
+        frame.add(start);
 		
 		frame.add(settings);
 		
