@@ -39,16 +39,10 @@ public class StartMenu{
      * action intended for each button. Also generates the
      * logo that is displayed at the top of the frame.
      */
-    public void run(){
+    public void run(int w,int h,String name){
 	    
         // Initialize JFrame
-        JFrame frame = new JFrame("T R O M");
-        
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        frame.setSize(900, 900);
-        
-        frame.getContentPane().setBackground(Color.BLACK); 
+        Window frame = new Window(w, h, name);
         
 		// Create start button
 		
@@ -56,13 +50,13 @@ public class StartMenu{
         
         Font font = new Font("Arial", Font.BOLD, 40);
         
-        start.setFont(font);
         
+        start.setFont(font);
         start.setBackground(Color.BLACK);
         
         start.setForeground(Color.CYAN);
 		
-        start.setBounds(350, 325, 200, 100);
+        start.setBounds(350, 235, 200, 100);
         
         start.setFocusPainted(false);
         
@@ -82,7 +76,7 @@ public class StartMenu{
         
         settings.setForeground(Color.YELLOW);
 		
-        settings.setBounds(350, 435, 200, 100);
+        settings.setBounds(350, 345, 200, 100);
         
         settings.setFocusPainted(false);
         
@@ -91,6 +85,26 @@ public class StartMenu{
 		settings.setVisible(true);
 		
 		settings.setText("Settings");
+        
+        JButton instructions = new JButton();
+        
+        instructions.setFont(font);
+        
+        instructions.setBackground(Color.BLACK);
+        
+        instructions.setForeground(Color.GREEN);
+		
+        instructions.setBounds(300, 455, 300, 100);
+        
+        instructions.setFocusPainted(false);
+        
+        instructions.setBorderPainted(false);
+		
+		instructions.setVisible(true);
+		
+		instructions.setText("Instructions");
+        
+        
 		
         // Create credits button
         
@@ -102,7 +116,7 @@ public class StartMenu{
         
         credits.setForeground(Color.MAGENTA);
 		
-        credits.setBounds(350, 550, 200, 100);
+        credits.setBounds(350, 570, 200, 100);
         
         credits.setFocusPainted(false);
         
@@ -124,7 +138,7 @@ public class StartMenu{
         
         exit.setForeground(Color.RED);
 		
-        exit.setBounds(350, 675, 200, 100);
+        exit.setBounds(350, 695, 200, 100);
         
         exit.setFocusPainted(false);
         
@@ -141,13 +155,15 @@ public class StartMenu{
         JLabel img = new JLabel(new ImageIcon("TROM.png"));
         panel.add(img);
         Dimension size = img.getMaximumSize();
-        img.setBounds(170, 100, size.width, size.height);
+        img.setBounds(170, 60, size.width, size.height);
        
        // Adding all of the buttons to the JFrame
 		
         frame.add(start);
 		
 		frame.add(settings);
+        
+        frame.add(instructions);
 		
 		frame.add(exit);
         
@@ -164,7 +180,7 @@ public class StartMenu{
         System.out.println("START clicked");
         gameGoing = true;
 		timer = false;
-		startPlaying(gameGoing, frame);
+		frame.dispose();
         }
 });
 
@@ -172,6 +188,7 @@ public class StartMenu{
     
             public void actionPerformed(ActionEvent e){
         System.out.println("SETTINGs clicked");
+        Settings.run(w, h, name);
         }
 });
 
@@ -179,8 +196,55 @@ public class StartMenu{
     
             public void actionPerformed(ActionEvent e){
         System.out.println("credits clicked");
+        frame.dispose();
+        Window creditsFrame = new Window(w,h,name);
+        JPanel namesPanel = new JPanel();
+        JLabel textLabel = new JLabel("<html>This game was made by:<br><br> Denis Shevchenko<br><br> Joseph Besenski<br><br>Jason Lyster<br><br>Daniel Sohn<br><br> Kevin Vo </html>");
+        textLabel.setFont(new Font("Serif", Font.ITALIC, 30));
+        textLabel.setForeground(Color.WHITE);
+        namesPanel.add(textLabel);
+        creditsFrame.setSize(900,900);
+        creditsFrame.getContentPane().setBackground(Color.BLACK);
+        namesPanel.setBackground(Color.BLACK);
+        creditsFrame.setLayout(null);
+        namesPanel.setSize(400,600);
+        namesPanel.setLocation(100,100);
+        creditsFrame.add(namesPanel);
+        creditsFrame.setVisible(true);
+        namesPanel.setVisible(true);
+        textLabel.setVisible(true);
+        JButton exitCredits = new JButton();
+        
+        exitCredits.setFont(font);
+        
+        exitCredits.setBackground(Color.BLACK);
+        
+        exitCredits.setForeground(Color.RED);
+		
+        exitCredits.setBounds(350, 695, 200, 100);
+        
+        exitCredits.setFocusPainted(false);
+        
+        exitCredits.setBorderPainted(false);
+		
+		exitCredits.setVisible(true);
+		
+		exitCredits.setText("Back");
+        
+        creditsFrame.add(exitCredits);
+        
+        exitCredits.addActionListener( new ActionListener(){
+    
+            public void actionPerformed(ActionEvent e){
+        System.out.println("EXITCREDITS clicked");
+		creditsFrame.dispose();
+        run(w, h, name);
         }
 });
+            
+        }
+        }
+);
         // Adds aciton listener to exit the game when exit is clicked
         exit.addActionListener( new ActionListener(){
     
@@ -188,15 +252,11 @@ public class StartMenu{
         System.out.println("EXIT clicked");
 		timer = false;
 		gameGoing = false;
-		startPlaying(gameGoing, frame);
+		frame.dispose();
         }
 });
 
     }
-	// Method that disposes of the title screen and calls gameGoing
-	public static boolean startPlaying(boolean gameGoing, JFrame frame){
-	frame.dispose();
-	return gameGoing;
-	
-		}     
+	  
 }
+
