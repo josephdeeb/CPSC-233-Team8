@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import java.awt.Color;
 public class Window extends JFrame implements KeyListener {
 
     /**
@@ -140,7 +140,8 @@ public class Window extends JFrame implements KeyListener {
         setSize(width, height);
 
         // Makes frame visible
-        setVisible(true);
+        getContentPane().setBackground(Color.BLACK);
+        setVisible(false);
 
         // Sets window name
         setName(name);
@@ -149,3 +150,4 @@ public class Window extends JFrame implements KeyListener {
     }
 
 }
+
