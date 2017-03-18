@@ -1,26 +1,19 @@
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 import javax.swing.BorderFactory;
-
 import java.lang.Thread;
-
 import java.util.Random;
 
 public class Main {
 
-    private static final int DEFAULT_WINDOW_WIDTH = 500;
-    private static final int DEFAULT_WINDOW_HEIGHT = 500;
+    private static final int DEFAULT_WINDOW_WIDTH = 900;
+    private static final int DEFAULT_WINDOW_HEIGHT = 900;
     private static final int DEFAULT_PLAYERS = 1;
     private static final String DEFAULT_WINDOW_NAME = "T R O M";
     private static Cell[][] labels = new Cell[50][50];
     private static Driver[] drivers;
     private static StartMenu startMenu = new StartMenu();
+    private static Settings settings = new Settings();
 
     /**
      * Main program function
@@ -28,14 +21,14 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-		startMenu.run();
-		while (startMenu.getTimer()) {
+		startMenu.run(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+		while (settings.getTimer()) {
 			stop(100);
 
         }
         
-        if (startMenu.getGameGoing()){
-			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME, 2);
+        if (settings.getGameGoing()){
+			initializeGame(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME, settings.getPlayers());
 		}
 		else{
 			finished();
@@ -123,9 +116,15 @@ public class Main {
         game.setVisible(true);
         window.getContentPane().add(game);
         window.setVisible(true);
+        
+        if (settings.getBoost() == true) {
+            powerUp();
+        }
+        
         int dead = 0;
-        // main game loop
-        while (startMenu.getGameGoing()) {
+        
+        // Main game loop
+        while (settings.getGameGoing()) {
             dead = 0;
             for (int i = 0; i < players; i++) {
                 if (drivers[i].getAlive() == true) {
@@ -135,9 +134,9 @@ public class Main {
                     dead++;
             }
             if (dead == (players - 1))
-                startMenu.setGameGoing(false);
+                settings.setGameGoing(false);
             game.repaint();
-            stop(75);
+            stop(settings.getDifficulty());
         }
 		drawBox(11,15);
         game(13, 17);
@@ -174,8 +173,8 @@ public class Main {
     // P.S this ain't needed, draw line works for boxes if you specify the right coordinates
 	private static void drawBox(int x, int y){
 		//starting x: 11 starting y: 15
-		for(int a=y;a<34;a++){
-			drawLine(x,x+26,a,a, Color.WHITE);
+		for(int a=y; a<34; a++){
+			drawLine(x, x+26, a, a, Color.WHITE);
 		}
 	}
     
@@ -245,10 +244,17 @@ public class Main {
         labels[x+22][y+6].colorUpdate(Color.BLACK);
     }
     
+    public static void powerUp() {
+        int randomX = new Random().nextInt(50);
+        int randomY = new Random().nextInt(50);
+        labels[randomX][randomY].colorUpdate(Color.BLUE);
+        
+    }
+    
     /**
      * Sets the gameGoing loop to false.
      */
     public static void stopGame() {
-        startMenu.setGameGoing(false);
+        settings.setGameGoing(false);
     }
 }

@@ -1,5 +1,5 @@
 import java.awt.Color;
-
+import java.util.Random;
 
 public class Driver {
     
@@ -69,7 +69,6 @@ public class Driver {
         int oldX = xCoordinate, oldY = yCoordinate;
         String reversed = reverseDirection(oldDirection);
         
-        
         if (direction.equals(reversed)) {
             
             direction = oldDirection;
@@ -114,13 +113,39 @@ public class Driver {
          * If the next cell is availabe to move into then the cell is updated
          * to show player movement
          */
+       
+        Random rand = new Random();
+        float r = rand.nextFloat();
+        float g = rand.nextFloat();
+        float b = rand.nextFloat();
+        Color randomColor = new Color(r, g, b);
+       
         if (nextColor.equals(Color.BLACK)) {
             xCoordinate = newX;
             yCoordinate = newY;
             oldDirection = direction;
             Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
         }
-        else {
+        
+        // This is for the power up. Power up should last 5 seconds but this
+        // is nowhere near complete yet
+        /**
+        else if(nextColor.equals(Color.BLUE)) {
+            long t= System.currentTimeMillis();
+            long end = t+4000;
+            while(System.currentTimeMillis() < end) {
+                xCoordinate = newX;     
+                yCoordinate = newY;
+                oldDirection = direction;
+                Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
+                playerColor = randomColor;
+       
+        }
+               
+        }
+        */      
+       
+       else {
             
             alive = false;
         }
