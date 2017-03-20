@@ -6,7 +6,7 @@ public class ButtonCreator extends JButton{
         setFont(font);
         setBackground(Color.BLACK);
         setForeground(color);
-		setBounds(width, height, xCoordinate, yCoordinate);
+	setBounds(width, height, xCoordinate, yCoordinate);
         setFocusPainted(false);
         setBorderPainted(false);
         setVisible(true);
