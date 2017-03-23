@@ -25,68 +25,17 @@ public class Settings {
         // Creates a new window
         Window frame = new Window(w, h, name);
         
-        // Initalizes new font to be used for JButtons
-        Font font = new Font("Arial", Font.BOLD, 40);
-        
-        // Creates the number of players button
-        JButton players = new JButton();
-        players.setFont(font);
-        players.setBackground(Color.BLACK);
-        players.setForeground(Color.YELLOW);
-		players.setBounds(350, 345, 200, 100);
-        players.setFocusPainted(false);
-        players.setBorderPainted(false);
-        players.setVisible(true);
-		players.setText("2 Player");
-        
-        // Creates the difficulty button
-        JButton difficulty = new JButton();
-        difficulty.setFont(font);
-        difficulty.setBackground(Color.BLACK);
-        difficulty.setForeground(Color.MAGENTA);
-		difficulty.setBounds(300, 570, 300, 100);
-        difficulty.setFocusPainted(false);
-        difficulty.setBorderPainted(false);
-        difficulty.setVisible(true);
-		difficulty.setText("Easy");
-        
-        // Creates the boosts toggle button
-        JButton boosts = new JButton();
-        boosts.setFont(font);
-        boosts.setBackground(Color.BLACK);
-        boosts.setForeground(Color.GREEN);
-		boosts.setBounds(300, 455, 300, 100);
-        boosts.setFocusPainted(false);
-        boosts.setBorderPainted(false);
-        boosts.setVisible(true);
-		boosts.setText("Boosts On");
-        
-        // Creates the back button
-        JButton back = new JButton();
-        back.setFont(font);
-        back.setBackground(Color.BLACK);
-        back.setForeground(Color.RED);
-		back.setBounds(300, 695, 300, 100);
-        back.setFocusPainted(false);
-        back.setBorderPainted(false);
-        back.setVisible(true);
-		back.setText("Back");
-        
-        // Creates the start game button
-        JButton start = new JButton();
-        start.setFont(font);
-        start.setBackground(Color.BLACK);
-        start.setForeground(Color.CYAN);
-		start.setBounds(300, 235, 300, 100);
-        start.setFocusPainted(false);
-        start.setBorderPainted(false);
-        start.setVisible(true);
-		start.setText("Start");
+        // Creates buttons
+        ButtonCreator start = new ButtonCreator(300, 250, 300, 100, Color.CYAN, "Start");
+        ButtonCreator players = new ButtonCreator(275, 350, 350, 100, Color.YELLOW, "2 Players");
+        ButtonCreator boosts = new ButtonCreator(250, 450, 400, 100, Color.GREEN, "Boosts On");
+        ButtonCreator difficulty = new ButtonCreator(230, 550, 450, 100, Color.MAGENTA, "Easy");
+        ButtonCreator back = new ButtonCreator(305, 650, 300, 100, Color.RED, "Back");
         
         // Initializes the title for settings
         JPanel panel = (JPanel) frame.getContentPane();
         panel.setLayout(null);
-        JLabel img = new JLabel(new ImageIcon("SETTINGS.png"));
+        JLabel img = new JLabel(new ImageIcon("bin/SETTINGS.png"));
         panel.add(img);
         Dimension size = img.getMaximumSize();
         img.setBounds(170, 40, size.width, size.height);
@@ -130,19 +79,19 @@ public class Settings {
             
                 public void actionPerformed(ActionEvent e){
         if (numOfPlayersText == 0) {
-            players.setText("2 Player");
+            players.setText("2 Players");
             numOfPlayers = 2;
             numOfPlayersText += 1;
         }
         
         else if (numOfPlayersText == 1) {
-            players.setText("3 Player");
+            players.setText("3 Players");
             numOfPlayers = 3;
             numOfPlayersText += 1;
         }
         
         else if (numOfPlayersText == 2) {
-            players.setText("4 Player");
+            players.setText("4 Players");
             numOfPlayers = 4;
             numOfPlayersText -= 2;
         }

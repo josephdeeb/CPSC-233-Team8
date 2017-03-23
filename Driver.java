@@ -10,6 +10,7 @@ public class Driver {
     private String direction = "down";
     private String oldDirection = "";
     private Color playerColor = Color.YELLOW;
+    private int score = 0;
     
     /**
      * Initializes player one
@@ -52,7 +53,7 @@ public class Driver {
         return xCoordinate;
     }
     
-    /* *
+    /**
      * Getter for the Y Coordinate
      */
     public int getYCoordinate() {
@@ -110,7 +111,7 @@ public class Driver {
         finally {}
         
         /** 
-         * If the next cell is availabe to move into then the cell is updated
+         * If the next cell is available to move into then the cell is updated
          * to show player movement
          */
        
@@ -124,6 +125,7 @@ public class Driver {
             xCoordinate = newX;
             yCoordinate = newY;
             oldDirection = direction;
+            score = score + 1;
             Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
         }
         
@@ -157,6 +159,13 @@ public class Driver {
      public boolean getAlive() {
         return alive;
     }
+     
+    /**
+     * Getter for player score
+     */
+     public int getScore() {
+    	 return score;
+     }
     
     /** 
      * Setter for the direction

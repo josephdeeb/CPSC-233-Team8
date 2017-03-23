@@ -117,11 +117,41 @@ public class Window extends JFrame implements KeyListener {
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
         
+        
+        // PLAYER 4
+        else if (event.getKeyCode() == KeyEvent.VK_NUMPAD6) {
+            try {
+                Main.getDriver(3).setDirection("right");
+            }
+            catch(ArrayIndexOutOfBoundsException exception) {}
+        }
+
+        else if (event.getKeyCode() == KeyEvent.VK_NUMPAD4) {
+            try {
+                Main.getDriver(3).setDirection("left");
+            }
+            catch(ArrayIndexOutOfBoundsException exception) {}
+        }
+
+        else if (event.getKeyCode() == KeyEvent.VK_NUMPAD5) {
+            try {
+                Main.getDriver(3).setDirection("down");
+            }
+            catch(ArrayIndexOutOfBoundsException exception) {}
+        }
+
+        else if (event.getKeyCode() == KeyEvent.VK_NUMPAD8) {
+            try {
+                Main.getDriver(3).setDirection("up");
+            }
+            catch(ArrayIndexOutOfBoundsException exception) {}
+        }
+        
     }
 
     // Required for syntax but has no use in this game.
-    public void keyReleased(KeyEvent e) {}
-    public void keyTyped(KeyEvent e) {}
+    public void keyReleased(KeyEvent event) {}
+    public void keyTyped(KeyEvent event) {}
 
     
     /**

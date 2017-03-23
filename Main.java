@@ -111,11 +111,16 @@ public class Main {
                 if (drivers[i].getAlive() == true) {
                     drivers[i].move();
                 }
-                else
-                    dead++;
+                else {
+                	dead++;
+                }
             }
-            if (dead == (players - 1))
+            if (dead == (players - 1)) {
                 settings.setGameGoing(false);
+                for (int i = 0; i < players; i++) {
+                	System.out.println("Player "+ (i+1) + " FINAL SCORE: " + drivers[i].getScore());
+                }
+            }
             map.repaintGame();
             stop(settings.getDifficulty());
         }

@@ -34,57 +34,17 @@ public class StartMenu{
 	    
         // Initialize JFrame
         Window frame = new Window(w, h, name);
-        Font font = new Font("Arial", Font.BOLD, 40);
 		
-        // Create start button
-	    JButton start = new JButton();
-        start.setFont(font);
-        start.setBackground(Color.BLACK);
-        start.setForeground(Color.CYAN);
-		start.setBounds(300, 260, 300, 100);
-        start.setFocusPainted(false);
-        start.setBorderPainted(false);
-        start.setVisible(true);
-        start.setText("Play Game");
-         
-        // Create instructions button
-        JButton instructions = new JButton();
-        instructions.setFont(font);
-        instructions.setBackground(Color.BLACK);
-        instructions.setForeground(Color.YELLOW);
-		instructions.setBounds(300, 390, 300, 100);
-        instructions.setFocusPainted(false);
-        instructions.setBorderPainted(false);
-        instructions.setVisible(true);
-		instructions.setText("Instructions");
-        
-        // Create credits button
-        JButton credits = new JButton();
-        credits.setFont(font);
-        credits.setBackground(Color.BLACK);
-        credits.setForeground(Color.MAGENTA);
-		credits.setBounds(350, 520, 200, 100);
-        credits.setFocusPainted(false);
-        credits.setBorderPainted(false);
-		credits.setVisible(true);
-		credits.setText("Credits");
-       credits.setVisible(true);
-        
-        // Create exit button
-        JButton exit = new JButton();
-        exit.setFont(font);
-        exit.setBackground(Color.BLACK);
-        exit.setForeground(Color.RED);
-		exit.setBounds(350, 650, 200, 100);
-        exit.setFocusPainted(false);
-        exit.setBorderPainted(false);
-        exit.setVisible(true);
-		exit.setText("Exit");
+        // Create Buttons
+	    ButtonCreator start = new ButtonCreator(350, 250, 200, 100, Color.CYAN, "Play");
+        ButtonCreator instructions = new ButtonCreator(200, 375, 500, 100, Color.YELLOW, "Instructions");
+        ButtonCreator credits = new ButtonCreator(300, 500, 300, 100, Color.MAGENTA, "Credits");
+        ButtonCreator exit = new ButtonCreator(350, 625, 200, 100, Color.RED, "Exit");
         
 		// Create JPanel and JLabel to add logo
 		JPanel panel = (JPanel) frame.getContentPane();
         panel.setLayout(null);
-        JLabel img = new JLabel(new ImageIcon("TROM.png"));
+        JLabel img = new JLabel(new ImageIcon("bin/TROM.png"));
         panel.add(img);
         Dimension size = img.getMaximumSize();
         img.setBounds(170, 60, size.width, size.height);
@@ -128,17 +88,8 @@ public class StartMenu{
         creditsFrame.setVisible(true);
         namesPanel.setVisible(true);
         textLabel.setVisible(true);
-        JButton exitCredits = new JButton();
         
-        // Creates Exit Button within the credits
-        exitCredits.setFont(font);
-        exitCredits.setBackground(Color.BLACK);
-        exitCredits.setForeground(Color.RED);
-		exitCredits.setBounds(350, 695, 200, 100);
-        exitCredits.setFocusPainted(false);
-        exitCredits.setBorderPainted(false);
-        exitCredits.setVisible(true);
-        exitCredits.setText("Back");
+        ButtonCreator exitCredits = new ButtonCreator(350, 625, 200, 100, Color.RED, "Back");
         creditsFrame.add(exitCredits);
         
         // Adds action listener for the exit credits button
