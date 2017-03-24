@@ -45,7 +45,7 @@ public class Instructions {
     
             public void actionPerformed(ActionEvent e) {
 		frame.dispose();
-        StartMenu.run(w, h, name);
+//        StartMenu.run(w, h, name);
         }
 });
 
