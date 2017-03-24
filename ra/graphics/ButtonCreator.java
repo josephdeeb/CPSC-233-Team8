@@ -7,7 +7,17 @@ import java.io.IOException;
 import javax.swing.*;
 
 
-public class ButtonCreator extends JButton{
+public class ButtonCreator extends JButton{	
+	/**
+     * Creates a button.
+     *
+     * @param xCoordinate Gets the x of the button
+     * @param yCoordinate Gets the y of the button
+     * @param width Determines how wide the button is
+     * @param height Determines how high the button is
+     * @param color Sets the color of the foreground of the button
+     * @param text Sets the name of the button
+     */
 	
     public ButtonCreator(int xCoordinate, int yCoordinate, int width, int height, Color color, String text){
         Font font;
