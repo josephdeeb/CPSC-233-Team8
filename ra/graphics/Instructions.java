@@ -9,6 +9,13 @@ import java.awt.event.*;
 
 public class Instructions {
     
+	/**
+	  * Creates the instructions screen
+	  *
+	  * @param w Width of frame
+	  * @param h Height of frame
+	  * @param name Name of frame
+	 */
     public static void run(int w,int h, String name) {
         
         Window frame = new Window(w, h, name);
