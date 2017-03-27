@@ -5,31 +5,35 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Random;
 
+import other.Main;
+
 import javax.swing.JPanel;
 
 public class Map {
-    private static final String DEFAULT_WINDOW_NAME = "T R O M";
-    private static final int DEFAULT_WINDOW_WIDTH = 900;
-    private static final int DEFAULT_WINDOW_HEIGHT = 900;
+    public static final String DEFAULT_WINDOW_NAME = "T R O M";
+    public static final int DEFAULT_WINDOW_WIDTH = 900;
+    public static final int DEFAULT_WINDOW_HEIGHT = 900;
     private Cell[][] labels = new Cell[50][50];
     private Window window;
     private JPanel game;
+    private Main main;
     
-    public Map() {
-        this(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+    public Map(Main initMain) {
+        this(initMain, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
     }
     
-    public Map(String n) {
-        this(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, n);
+    public Map(Main initMain, String n) {
+        this(initMain, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, n);
     }
     
-    public Map(int width, int height, String n) {
+    public Map(Main initMain, int width, int height, String n) {
+        main = initMain;
         initialize(width, height, n);
     }
     
     private void initialize(int w, int h, String name) {
         
-        window = new Window(w, h, name);
+        window = new Window(w, h, name, main);
 
         game = new JPanel(new GridLayout(50, 50));
         

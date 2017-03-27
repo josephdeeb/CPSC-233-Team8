@@ -6,12 +6,13 @@ public class Driver {
     
     private int xCoordinate = 0;
     private int yCoordinate = 0;
-    private static String DEFAULT_DIRECTION = "down";
+    public static String DEFAULT_DIRECTION = "down";
     private boolean alive = true;
     private String direction = "down";
     private String oldDirection = "";
     private Color playerColor = Color.YELLOW;
     private int score = 0;
+    private Main main;
     
     /**
      * Initializes player one
@@ -20,8 +21,8 @@ public class Driver {
      * @param y - Y Coordinate of the wanted cell
      * @param color - Color of the player
      */
-    public Driver(int x, int y, Color color) {
-        this(x, y, color, DEFAULT_DIRECTION);
+    public Driver(int x, int y, Color color, Main initMain) {
+        this(x, y, color, initMain, DEFAULT_DIRECTION);
     }
     
     /** 
@@ -32,10 +33,11 @@ public class Driver {
      * @param color - Color of the player
      * @param initDirection - Initial Direction of the other players
      */
-     public Driver(int x, int y, Color color, String initDirection) {
+     public Driver(int x, int y, Color color, Main initMain, String initDirection) {
         xCoordinate = x;
         yCoordinate = y;
         playerColor = color;
+        main = initMain;
         direction = initDirection;
     }
     
@@ -44,7 +46,7 @@ public class Driver {
      */
     public void start() {
         
-        Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
+        main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
     }
     
     /**
@@ -105,8 +107,7 @@ public class Driver {
          * Tries to see if the next cell is available to move into
          */
         try {
-            
-            nextColor = Main.getCell(newX, newY).getColor();
+            nextColor = main.getCell(newX, newY).getColor();
         }
         catch (Exception IndexOutOfBounds) {}
         finally {}
@@ -127,7 +128,7 @@ public class Driver {
             yCoordinate = newY;
             oldDirection = direction;
             score = score + 1;
-            Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
+            main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
         }
         
         // This is for the power up. Power up should last 5 seconds but this
