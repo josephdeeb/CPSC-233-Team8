@@ -2,10 +2,13 @@ package other;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.BorderFactory;
+import java.io.File;
+import java.io.IOException;
 
 import graphics.Cell;
 import graphics.Map;
+import graphics.Window;
+import graphics.ButtonCreator;
 
 import java.lang.Thread;
 import java.util.Random;
@@ -76,6 +79,36 @@ public class Main {
         return map.getCell(x, y);
     }
 	
+    public void restartGame(Color winner) {
+        Window window = new Window(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+        window.setLayout(null);
+        
+        Font font;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("Tron.ttf"));
+            font = font.deriveFont(Font.PLAIN, 50);
+        } catch (FontFormatException | IOException error) {
+            font = new Font("Arial", Font.BOLD, 40);
+        }
+        
+        JPanel panel = new JPanel();
+        JLabel text = new JLabel("<html>Play Again</html>");
+        text.setFont(font);
+        text.setForeground(winner);
+        panel.setBackground(Color.BLACK);
+        panel.add(text);
+        panel.setSize(400,600);
+        panel.setLocation(250,300);
+        panel.setVisible(true);
+        text.setVisible(true);
+        window.add(panel);
+        ButtonCreator yes = new ButtonCreator(200,400, 150, 100, winner, "Yes");
+        ButtonCreator no = new ButtonCreator(550,400, 150, 100, winner, "No");
+        window.add(no);
+        window.add(yes);
+        window.setVisible(true);
+    }
+    
 	/**
 	 * Initializes and runs game
 	 * 
@@ -131,6 +164,10 @@ public class Main {
             stop(settings.getDifficulty());
         }
         map.gameOver();
+        stop(1000);
+        System.out.println("huh");
+        restartGame(Color.RED);
+        
         
     }
     // This method uses code copied from http://stackoverflow.com/questions/24104313/how-to-delay-in-java by Ann Ragg
