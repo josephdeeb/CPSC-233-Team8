@@ -2,11 +2,12 @@ package other;
 import java.awt.Color;
 import java.util.Random;
 
-public class Driver {
+public enum Driver {
+    YELLOW(5, 5, Color.YELLOW, "down"), RED(44, 5, Color.RED, "left"), CYAN(44, 44, Color.CYAN, "up"), MAGENTA(5, 44, Color.MAGENTA, "right");
     
     private int xCoordinate = 0;
     private int yCoordinate = 0;
-    public static String DEFAULT_DIRECTION = "down";
+    private String DEFAULT_DIRECTION = "down";
     private boolean alive = true;
     private String direction = "down";
     private String oldDirection = "";
@@ -14,16 +15,17 @@ public class Driver {
     private int score = 0;
     private Main main;
     
-    /**
+/*    /**
      * Initializes player one
      *
      * @param x - X Coordinate of the wanted cell
      * @param y - Y Coordinate of the wanted cell
      * @param color - Color of the player
-     */
-    public Driver(int x, int y, Color color, Main initMain) {
+    private Driver(int x, int y, Color color, Main initMain) {
         this(x, y, color, initMain, DEFAULT_DIRECTION);
-    }
+    } 
+    
+*/
     
     /** 
      * Initializes any extra players past player one
@@ -33,14 +35,17 @@ public class Driver {
      * @param color - Color of the player
      * @param initDirection - Initial Direction of the other players
      */
-     public Driver(int x, int y, Color color, Main initMain, String initDirection) {
+     private Driver(int x, int y, Color color, String initDirection) {
         xCoordinate = x;
         yCoordinate = y;
         playerColor = color;
-        main = initMain;
         direction = initDirection;
     }
     
+    public void setMain(Main initMain) {
+        main = initMain;
+    }
+     
     /**
      * Starts the game by adding player color to cells
      */

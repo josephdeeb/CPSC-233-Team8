@@ -2,8 +2,7 @@ package other;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import graphics.Cell;
 import graphics.Map;
@@ -92,12 +91,12 @@ public class Main {
         }
         
         JPanel panel = new JPanel();
-        JLabel text = new JLabel("<html>Play Again</html>");
+        JLabel text = new JLabel("Play Again");
         text.setFont(font);
         text.setForeground(winner);
         panel.setBackground(Color.BLACK);
         panel.add(text);
-        panel.setSize(400,600);
+        panel.setSize(400,80);
         panel.setLocation(250,300);
         panel.setVisible(true);
         text.setVisible(true);
@@ -126,14 +125,22 @@ public class Main {
         
         drivers = new Driver[players];
         for (int i = 0; i < players; i++) {
-            if (i == 0)
-                drivers[i] = new Driver(5, 5, Color.YELLOW, this, "down");
-            else if (i == 1)
-                drivers[i] = new Driver(44, 5, Color.RED, this, "left");
-            else if (i == 2)
-                drivers[i] = new Driver(44, 44, Color.CYAN, this, "up");
-            else if (i == 3)
-                drivers[i] = new Driver(5, 44, Color.MAGENTA, this, "right");
+            if (i == 0) {
+                drivers[i] = Driver.YELLOW;
+                drivers[i].setMain(this);
+            }
+            else if (i == 1) {
+                drivers[i] = Driver.RED;
+            drivers[i].setMain(this);
+            }
+            else if (i == 2) {
+                drivers[i] = Driver.CYAN;
+                drivers[i].setMain(this);
+            }
+            else if (i == 3) {
+                drivers[i] = Driver.MAGENTA;
+                drivers[i].setMain(this);
+            }
         }
         
         map = new Map(this, w, h, name);
@@ -154,7 +161,7 @@ public class Main {
                 	dead++;
                 }
             }
-            if (dead == (players - 1)) {
+            if (dead >= (players - 1)) {
                 settings.setGameGoing(false);
                 for (int i = 0; i < players; i++) {
                 	System.out.println("Player "+ (i+1) + " FINAL SCORE: " + drivers[i].getScore());
@@ -164,6 +171,22 @@ public class Main {
             stop(settings.getDifficulty());
         }
         map.gameOver();
+        String fileName = "scores.txt";
+        PrintWriter out = null;
+        try {
+            File file = new File(fileName);
+            if (!file.exists())
+                file.createNewFile();
+            out = new PrintWriter(new FileOutputStream(file));
+            for (int i=0;i < players;i++) {
+                out.write("PLAYER " + (i+1) + " SCORE: " + drivers[i].getScore());
+                out.println();
+            }
+        }
+        catch (IOException e) {
+            System.out.println("ERROR: No scores.txt found");
+        }
+        out.close();
         stop(1000);
         System.out.println("huh");
         restartGame(Color.RED);
