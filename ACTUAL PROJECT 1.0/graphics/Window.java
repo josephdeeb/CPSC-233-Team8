@@ -1,15 +1,24 @@
 package graphics;
 import javax.swing.JFrame;
-
 import other.Main;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Color;
+
 public class Window extends JFrame implements KeyListener {
+    
+    /**
+     *Instance of the main object
+     */
     private Main main;
     
-    
+    /**
+     * Constructor with three arguments that calls constructor with four arguments
+     *
+     * @param width Width of window
+     * @param height Height of window
+     * @param name Name of game (TROM)
+     */
     public Window(int width, int height, String name) {
         this(width, height, name, null);
     }
@@ -20,6 +29,7 @@ public class Window extends JFrame implements KeyListener {
      * @param width Width of the window
      * @param height Height of the window
      * @param name Name of the window
+     * @param initMain sets the main variable to this instance of main
      */
     public Window(int width, int height, String name, Main initMain) {
         main = initMain;
@@ -172,22 +182,13 @@ public class Window extends JFrame implements KeyListener {
      * @param name Name of the window
      */
     private void initialize(int width, int height, String name) {
-
-        // Makes it so that the X button, when pressed, exits the window
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Sets window size to the specified width and height
         setSize(width, height);
-
-        // Makes frame visible
         getContentPane().setBackground(Color.BLACK);
         setVisible(false);
-
-        // Sets window name
         setName(name);
         setTitle(name);
 
     }
-
 }
-
