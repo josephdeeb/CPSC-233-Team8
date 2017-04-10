@@ -9,12 +9,40 @@ import javax.swing.JPanel;
 import other.Main;
 
 public class Map {
+    
+    /**
+     * Sets the name of our game that'll appear at the top window
+     */
     public static final String DEFAULT_WINDOW_NAME = "T R O M";
+    
+    /**
+     * The width of all of the windows
+     */
     public static final int DEFAULT_WINDOW_WIDTH = 900;
+    
+    /**
+     * The height of all of the windows
+     */
     public static final int DEFAULT_WINDOW_HEIGHT = 900;
+    
+    /**
+     * The number of cells in the window
+     */
     private Cell[][] labels = new Cell[50][50];
+    
+    /**
+     * Creates a window instance
+     */
     private Window window;
+    
+    /**
+     * Creates a JPanel called game
+     */
     private JPanel game;
+    
+    /**
+     * Creates a main instance
+     */
     private Main main;
     
     /**
