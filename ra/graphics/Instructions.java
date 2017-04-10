@@ -2,20 +2,18 @@ package graphics;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import other.StartMenu;
-
 import java.awt.event.*;
+import other.StartMenu;
 
 public class Instructions {
     
-	/**
-	  * Creates the instructions screen
-	  *
-	  * @param w Width of frame
-	  * @param h Height of frame
-	  * @param name Name of frame
-	 */
+    /**
+      * Creates the instructions screen
+      *
+      * @param w Width of frame
+      * @param h Height of frame
+      * @param name Name of frame
+      */
     public static void run(int w,int h, String name) {
         
         Window frame = new Window(w, h, name);
@@ -24,7 +22,7 @@ public class Instructions {
         
         
         // Create JPanel and JLabel to add logo
-		JPanel panel = (JPanel) frame.getContentPane();
+    	JPanel panel = (JPanel) frame.getContentPane();
         panel.setLayout(null);
         JLabel img = new JLabel(new ImageIcon("INSTRUCTIONS.png"));
         panel.add(img);
@@ -47,15 +45,11 @@ public class Instructions {
         frame.add(img);
         frame.setVisible(true);
         
-         // Adds action listener for the back button
+        // Adds action listener for the back button
         back.addActionListener( new ActionListener(){
-    
-            public void actionPerformed(ActionEvent e) {
-		frame.dispose();
-//        StartMenu.run(w, h, name);
-        }
-});
-
-    }
-    
+    	    public void actionPerformed(ActionEvent e) {
+	        	frame.dispose();
+            }
+        });
+    } 
 }
