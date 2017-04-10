@@ -1,52 +1,27 @@
 package other;
+
 import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import graphics.ButtonCreator;
 import graphics.Window;
-
 import java.awt.event.*;
 
 public class Settings {
     
-    /**
-     * Boost toggle
-     */
-    private static boolean boostBool = true;
+    private boolean boostBool = true;
+    private int numOfPlayers = 2;
+    private int numOfPlayersText = 1;
+    private int difficultySpeed = 100;
+    private boolean gameGoing = false;
+    private boolean timer = true;
+    public StartMenu startMenu;
+    public Main main;
     
-    /**
-     * Number of players
-     */
-    private static int numOfPlayers = 2;
-    
-    /**
-     * The button text for number of players
-     */
-    private static int numOfPlayersText = 1;
-    
-    /**
-     * Speed of the game, different speeds equate to different difficulties
-     */
-    private static int difficultySpeed = 100;
-    
-    
-    /**
-     * Condition of whether or not the game has started
-     */
-    private static boolean gameGoing = false;
-    
-    
-    /**
-     * Timer to stop the thread in the main class
-     */
-    private static boolean timer = true;
-    
-    
-    /**
-     * Creates a new instance of startMenu
-     */
-    private static StartMenu startMenu = new StartMenu();
+    public Settings(Main initMain) {
+        main = initMain;
+        startMenu = new StartMenu(this);
+    }
     
     /** 
      * Runs the Settings menu
@@ -55,10 +30,11 @@ public class Settings {
      * @param height Sets the height of the window
      * @param name Sets the name of the window
      */
-    public static void run(int w,int h, String name){
+    public void run(int w,int h, String name){
         
         // Creates a new window
         Window frame = new Window(w, h, name);
+        System.out.println("AHHHHHHHH");
         
         // Creates buttons
         ButtonCreator start = new ButtonCreator(300, 250, 300, 100, Color.CYAN, "Start");
@@ -70,7 +46,7 @@ public class Settings {
         // Initializes the title for settings
         JPanel panel = (JPanel) frame.getContentPane();
         panel.setLayout(null);
-        JLabel img = new JLabel(new ImageIcon("SETTINGS.png"));
+        JLabel img = new JLabel(new ImageIcon("assets/SETTINGS.png"));
         panel.add(img);
         Dimension size = img.getMaximumSize();
         img.setBounds(170, 40, size.width, size.height);
@@ -87,124 +63,139 @@ public class Settings {
         
         // Adds action listener for the back button
         back.addActionListener( new ActionListener(){
+    
             public void actionPerformed(ActionEvent e){
-                startMenu.run(w, h, name);
-                frame.dispose();
-            }
-        });
+		startMenu.run(w, h, name);
+        frame.dispose();
+        }
+});
         
         // Adds action listener for the boosts button
         boosts.addActionListener( new ActionListener() {
+            
             public void actionPerformed(ActionEvent e){
-                if (boostBool == true) {
-                    boosts.setText("Boosts Off");  
-                    boostBool = false;
-                }else{
-                    boosts.setText("Boosts On");
-                    boostBool = true;
-                }
+        if (boostBool == true) {
+        boosts.setText("Boosts Off");  
+        boostBool = false;
+        }
+        else {
+            boosts.setText("Boosts On");
+            boostBool = true;
+        }
             }
-        });
+});
             
         // Adds action listener for the players button
         players.addActionListener( new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                if (numOfPlayersText == 0) {
-                    players.setText("2 Players");
-                    numOfPlayers = 2;
-                    numOfPlayersText += 1;
-                }else if (numOfPlayersText == 1) {
-                    players.setText("3 Players");
-                    numOfPlayers = 3;
-                    numOfPlayersText += 1;
-                }else if (numOfPlayersText == 2) {
-                    players.setText("4 Players");
-                    numOfPlayers = 4;
-                    numOfPlayersText -= 2;
+            
+                public void actionPerformed(ActionEvent e){
+        if (numOfPlayersText == 0) {
+            players.setText("2 Players");
+            numOfPlayers = 2;
+            numOfPlayersText += 1;
+        }
+        
+        else if (numOfPlayersText == 1) {
+            players.setText("3 Players");
+            numOfPlayers = 3;
+            numOfPlayersText += 1;
+        }
+        
+        else if (numOfPlayersText == 2) {
+            players.setText("4 Players");
+            numOfPlayers = 4;
+            numOfPlayersText -= 2;
+        }
                 }
-            }
-        });
+});
             
         // Adds action listener for the difficulty button
         difficulty.addActionListener( new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (difficultySpeed == 100) {
-                    difficulty.setText("Intermediate");
-                    difficultySpeed -= 30;
-                    System.out.println(difficultySpeed);
-                }else if (difficultySpeed == 70) {
-                    difficulty.setText("Expert");
-                    difficultySpeed -= 35;
-                    System.out.println(difficultySpeed);
-                }else if (difficultySpeed == 35) {
-                    difficulty.setText("Easy");
-                    difficultySpeed += 65;
-                    System.out.println(difficultySpeed);
-                }
-            }
+           
+           public void actionPerformed(ActionEvent e) {
+        if (difficultySpeed == 100) {
+            difficulty.setText("Intermediate");
+            difficultySpeed -= 30;
+            System.out.println(difficultySpeed);
+        }
+        
+        else if (difficultySpeed == 70) {
+            difficulty.setText("Expert");
+            difficultySpeed -= 35;
+            System.out.println(difficultySpeed);
+        }
+        
+        else if (difficultySpeed == 35) {
+            difficulty.setText("Easy");
+            difficultySpeed += 65;
+            System.out.println(difficultySpeed);
+        }
+    }
 
-        });   
+});   
             
         // Adds action listener for the start button
         start.addActionListener( new ActionListener() {
+            
             public void actionPerformed(ActionEvent e) {
-                gameGoing = true;
-		        timer = false;
-		        frame.dispose();
-            }
-        });
+        gameGoing = true;
+		timer = false;
+		frame.dispose();
+    }
+    
+});
+
     }
     
     /**
      * Getter for number of players
-     *
-     * @return returns variable numOfPlayers
      */
     public int getPlayers() {
         return numOfPlayers;
     }
     
+    public void setPlayers(int number) {
+        if (number < 1)
+            numOfPlayers = 1;
+        if (number > 4)
+            numOfPlayers = 4;
+        else
+            numOfPlayers = number;
+    }
+    
     /**
      * Getter for the boost boolean
-     *
-     * @return returns condition of boost
-     */
+    */
     public boolean getBoost() {
         return boostBool;
     }
  
     /**
      * Getter for difficulty
-     *
-     * @return returns game speed
      */
     public int getDifficulty() {
         return difficultySpeed;
     }
 
 	/**
-     * Getter for getGameGoing
-     * 
-     * @return returns whether or not game is running
+     *Getter for getGameGoing
      */
     public boolean getGameGoing() {
 	    return gameGoing;
     }
 
     /**
-     * Getter for timer
-     *
-     * @return timer for stop thread
-     */
+    * Getter for timer
+    */
     public boolean getTimer() {
 	    return timer;
 	}
     
     /**
-     * Setter method for gameGoing
-     *
-     * @param setter passes in setter for gameGoing
-     */
+    * Setter method for gameGoing
+    *
+    * @param setter passes in setter for gameGoing
+    */
 	public void setGameGoing(boolean setter) {
 	    gameGoing = setter;
 	}
