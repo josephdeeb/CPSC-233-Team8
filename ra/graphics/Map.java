@@ -4,10 +4,9 @@ package graphics;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Random;
+import javax.swing.JPanel;
 
 import other.Main;
-
-import javax.swing.JPanel;
 
 public class Map {
     public static final String DEFAULT_WINDOW_NAME = "T R O M";
@@ -18,23 +17,47 @@ public class Map {
     private JPanel game;
     private Main main;
     
+    /**
+     *Constructor with one argument that calls constructor with four arguments
+     *
+     *@param initMain Main object to initalize graphical game with
+     */
     public Map(Main initMain) {
         this(initMain, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
     }
     
+    /**
+     *Constructor with two argument that calls constructor with four arguments
+     *
+     *@param initMain Main object to initialize graphical game with
+     *@param n Name of game "TROM"
+     */
     public Map(Main initMain, String n) {
         this(initMain, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, n);
     }
     
+    /**
+     *Constructor with four arguments that will initialize the game
+     *
+     *@param initMain Main object of game
+     *@param width Width of window
+     *@param height Height of window
+     *@param n Name of game "TROM"
+     */
     public Map(Main initMain, int width, int height, String n) {
         main = initMain;
         initialize(width, height, n);
     }
     
+    /**
+     *Creates the window and the cells
+     *
+     *@param width Width of window
+     *@param height Height of window
+     *@param name Name of game "TROM"
+     */
     private void initialize(int w, int h, String name) {
-        
         window = new Window(w, h, name, main);
-
         game = new JPanel(new GridLayout(50, 50));
         
         int x = 0;
@@ -54,6 +77,8 @@ public class Map {
         window.setVisible(true);
     }
     
+    /**
+     *
     public void repaintGame() {
         game.repaint();
     }
