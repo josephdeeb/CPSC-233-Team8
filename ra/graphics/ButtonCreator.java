@@ -8,6 +8,7 @@ import javax.swing.*;
 
 
 public class ButtonCreator extends JButton{	
+	
 	/**
      * Creates a button.
      *
@@ -17,6 +18,9 @@ public class ButtonCreator extends JButton{
      * @param height Determines how high the button is
      * @param color Sets the color of the foreground of the button
      * @param text Sets the name of the button
+     *
+     * @exception FontFormatException unreadable format sets font to Arial
+     * @exception IOException if the ttf file does not exists, sets font to Arial
      */
 	
     public ButtonCreator(int xCoordinate, int yCoordinate, int width, int height, Color color, String text){
