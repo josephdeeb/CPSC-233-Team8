@@ -3,9 +3,7 @@ import javax.swing.JLabel;
 import javax.swing.BorderFactory;
 import java.awt.Color;
 
-/*
- *@author Team 8
- */
+
 public class Cell extends JLabel {
     /**
      *Used to set the current color
@@ -13,9 +11,7 @@ public class Cell extends JLabel {
     private Color currentColor = null;
     
     /**
-     *Initializes the properties of the cell, which inherits properties from JLabel
-     *
-     *Sets the cells as black, opaque, textless cells
+     *Initializes the properties of the cell, which inherits properties from JLabeL
      */
     public Cell() {
         setText("");
