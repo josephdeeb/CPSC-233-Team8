@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-
 public class ButtonCreator extends JButton{	
 	
 	/**
