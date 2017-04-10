@@ -46,18 +46,23 @@ public class StartMenu{
         ButtonCreator credits = new ButtonCreator(300, 500, 300, 100, Color.MAGENTA, "Credits");
         ButtonCreator exit = new ButtonCreator(350, 625, 200, 100, Color.RED, "Exit");
         
-		// Create JPanel and JLabel to add logo
-		JPanel panel = (JPanel) frame.getContentPane();
+	// Create JPanel and JLabel to add logo
+	JPanel panel = (JPanel) frame.getContentPane();
         panel.setLayout(null);
-        JLabel img = new JLabel(new ImageIcon("TROM.png"));
+        try {
+	    JLabel img = new JLabel(new ImageIcon("TROM.png"));
         panel.add(img);
         Dimension size = img.getMaximumSize();
         img.setBounds(170, 60, size.width, size.height);
+	}
+	catch (IOException e) {
+		system.out.println("File not found");
+	}
        
         // Adding all of the buttons to the JFrame
-		frame.add(start);
+	frame.add(start);
         frame.add(instructions);
-		frame.add(exit);
+	frame.add(exit);
         frame.add(credits);
         frame.add(img);
         frame.setVisible(true);
