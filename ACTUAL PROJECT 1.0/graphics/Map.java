@@ -121,6 +121,13 @@ public class Map {
     }
     
     /**
+     * Disposes of the current window
+     */
+    public void disposeWindow(){
+        Window.dispose();
+    }
+    
+    /**
      * Returns a cell from the main cell array.
      * 
      * @param x X Coordinate of the wanted cell
