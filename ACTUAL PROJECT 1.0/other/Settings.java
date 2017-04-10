@@ -9,13 +9,47 @@ import java.awt.event.*;
 
 public class Settings {
     
+    /**
+     * Boost toggle
+     */
     private boolean boostBool = true;
+    
+    /**
+     * Number of players
+     */
     private int numOfPlayers = 2;
+    
+    /**
+     * The button text for number of players
+     */
     private int numOfPlayersText = 1;
+    
+    /**
+     * Speed of the game, different speeds equate to different difficulties
+     */
     private int difficultySpeed = 100;
+    
+    
+    /**
+     * Condition of whether or not the game has started
+     */
     private boolean gameGoing = false;
+    
+    
+    /**
+     * Timer to stop the thread in the main class
+     */
     private boolean timer = true;
+    
+    
+    /**
+     * Creates a new instance of startMenu
+     */
     public StartMenu startMenu;
+	
+    /**
+     *Creates a new instance of main
+     */
     public Main main;
     
     public Settings(Main initMain) {
@@ -63,97 +97,88 @@ public class Settings {
         
         // Adds action listener for the back button
         back.addActionListener( new ActionListener(){
-    
             public void actionPerformed(ActionEvent e){
-		startMenu.run(w, h, name);
-        frame.dispose();
-        }
-});
+                startMenu.run(w, h, name);
+                frame.dispose();
+            }
+        });
         
         // Adds action listener for the boosts button
         boosts.addActionListener( new ActionListener() {
-            
             public void actionPerformed(ActionEvent e){
-        if (boostBool == true) {
-        boosts.setText("Boosts Off");  
-        boostBool = false;
-        }
-        else {
-            boosts.setText("Boosts On");
-            boostBool = true;
-        }
+                if (boostBool == true) {
+                    boosts.setText("Boosts Off");  
+                    boostBool = false;
+                }else{
+                    boosts.setText("Boosts On");
+                    boostBool = true;
+                }
             }
-});
+        });
             
         // Adds action listener for the players button
         players.addActionListener( new ActionListener() {
-            
-                public void actionPerformed(ActionEvent e){
-        if (numOfPlayersText == 0) {
-            players.setText("2 Players");
-            numOfPlayers = 2;
-            numOfPlayersText += 1;
-        }
-        
-        else if (numOfPlayersText == 1) {
-            players.setText("3 Players");
-            numOfPlayers = 3;
-            numOfPlayersText += 1;
-        }
-        
-        else if (numOfPlayersText == 2) {
-            players.setText("4 Players");
-            numOfPlayers = 4;
-            numOfPlayersText -= 2;
-        }
+            public void actionPerformed(ActionEvent e){
+                if (numOfPlayersText == 0) {
+                    players.setText("2 Players");
+                    numOfPlayers = 2;
+                    numOfPlayersText += 1;
+                }else if (numOfPlayersText == 1) {
+                    players.setText("3 Players");
+                    numOfPlayers = 3;
+                    numOfPlayersText += 1;
+                }else if (numOfPlayersText == 2) {
+                    players.setText("4 Players");
+                    numOfPlayers = 4;
+                    numOfPlayersText -= 2;
                 }
-});
+            }
+        });
             
         // Adds action listener for the difficulty button
         difficulty.addActionListener( new ActionListener() {
-           
-           public void actionPerformed(ActionEvent e) {
-        if (difficultySpeed == 100) {
-            difficulty.setText("Intermediate");
-            difficultySpeed -= 30;
-            System.out.println(difficultySpeed);
-        }
-        
-        else if (difficultySpeed == 70) {
-            difficulty.setText("Expert");
-            difficultySpeed -= 35;
-            System.out.println(difficultySpeed);
-        }
-        
-        else if (difficultySpeed == 35) {
-            difficulty.setText("Easy");
-            difficultySpeed += 65;
-            System.out.println(difficultySpeed);
-        }
-    }
+            public void actionPerformed(ActionEvent e) {
+                if (difficultySpeed == 100) {
+                    difficulty.setText("Intermediate");
+                    difficultySpeed -= 30;
+                    System.out.println(difficultySpeed);
+                }else if (difficultySpeed == 70) {
+                    difficulty.setText("Expert");
+                    difficultySpeed -= 35;
+                    System.out.println(difficultySpeed);
+                }else if (difficultySpeed == 35) {
+                    difficulty.setText("Easy");
+                    difficultySpeed += 65;
+                    System.out.println(difficultySpeed);
+                }
+            }
 
-});   
+        });   
             
         // Adds action listener for the start button
         start.addActionListener( new ActionListener() {
-            
             public void actionPerformed(ActionEvent e) {
-        gameGoing = true;
-		timer = false;
-		frame.dispose();
-    }
-    
-});
-
+                gameGoing = true;
+		        timer = false;
+		        frame.dispose();
+            }
+        });
     }
     
     /**
      * Getter for number of players
+     *
+     * @return returns variable numOfPlayers
      */
     public int getPlayers() {
         return numOfPlayers;
     }
     
+    /**
+     * Setter for the number of players
+     *
+     * @param number Number of players
+     */
     public void setPlayers(int number) {
         if (number < 1)
             numOfPlayers = 1;
@@ -165,28 +190,36 @@ public class Settings {
     
     /**
      * Getter for the boost boolean
-    */
+     *
+     * @return returns condition of boost
+     */
     public boolean getBoost() {
         return boostBool;
     }
  
     /**
      * Getter for difficulty
+     *
+     * @return returns game speed
      */
     public int getDifficulty() {
         return difficultySpeed;
     }
 
 	/**
-     *Getter for getGameGoing
+     * Getter for getGameGoing
+     * 
+     * @return returns whether or not game is running
      */
     public boolean getGameGoing() {
 	    return gameGoing;
     }
 
     /**
-    * Getter for timer
-    */
+     * Getter for timer
+     *
+     * @return timer for stop thread
+     */
     public boolean getTimer() {
 	    return timer;
 	}
