@@ -106,6 +106,26 @@ public class Main {
         window.add(no);
         window.add(yes);
         window.setVisible(true);
+   
+	 // Adds action listener for the yes button
+        yes.addActionListener( new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+        startMenu.run(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+        window.dispose();
+    }
+    
+});
+
+         // Adds action listener for the no button
+        no.addActionListener( new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+        startMenu.run(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+        window.dispose();
+    }
+    
+});
     }
     
 	/**
