@@ -78,11 +78,15 @@ public class Map {
     }
     
     /**
-     *
+     *Redraws game GUI
+     */
     public void repaintGame() {
         game.repaint();
     }
     
+    /**
+     *Draws the GAME OVER box
+     */
     public void gameOver() {
         drawBox(11,15);
         game(13, 17);
@@ -117,7 +121,12 @@ public class Map {
         }
     }
     
-    // P.S this ain't needed, draw line works for boxes if you specify the right coordinates
+    /**
+     *method to draw a box, namely the GAME OVER box
+     *
+     *@param x intial x coordinate
+     *@param y initial y coordinate
+     */
     private void drawBox(int x, int y){
         //starting x: 11 starting y: 15
         for(int a=y; a<34; a++){
