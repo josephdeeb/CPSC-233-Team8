@@ -124,7 +124,7 @@ public class Map {
      * Disposes of the current window
      */
     public void disposeWindow(){
-        Window.dispose();
+        window.dispose();
     }
     
     /**
