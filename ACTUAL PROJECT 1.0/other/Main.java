@@ -86,13 +86,14 @@ public class Main {
         return map.getCell(x, y);
     }
 	
-    public boolean restartGame(Color winner) {
+    public boolean restartGame(Color winner, int playerNum) {
+       
         Window window = new Window(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
         window.setLayout(null);
         
         Font font;
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("Tron.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("assets/Tron.ttf"));
             font = font.deriveFont(Font.PLAIN, 50);
         } catch (FontFormatException | IOException error) {
             font = new Font("Arial", Font.BOLD, 40);
@@ -109,19 +110,39 @@ public class Main {
         panel.setVisible(true);
         text.setVisible(true);
         window.add(panel);
+        JLabel winnerText;
+        
+        JPanel panel2 = new JPanel();
+        if (playerNum == 0) {
+             winnerText = new JLabel("TIE");
+        }
+        else {
+            winnerText = new JLabel("Player " + playerNum + " Wins");
+        }
+        panel2.setBackground(Color.BLACK);
+        panel2.add(winnerText);
+        panel2.setSize(500,80);
+        panel2.setLocation(210,150);
+        panel2.setVisible(true);
+        winnerText.setFont(font);
+        winnerText.setForeground(winner);
+        winnerText.setVisible(true);
+        window.add(panel2);
+        
         ButtonCreator yes = new ButtonCreator(200,400, 150, 100, winner, "Yes");
         ButtonCreator no = new ButtonCreator(550,400, 150, 100, winner, "No");
         window.add(no);
         window.add(yes);
         window.setVisible(true);
+        
         CountDownLatch wait2 = new CountDownLatch(1);
-        BooleanRestart shit = new BooleanRestart();
+        BooleanRestart restart = new BooleanRestart();
         // Adds action listener for the yes button
         yes.addActionListener( new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
         window.dispose();
-        shit.setReturned(true);
+        restart.setReturned(true);
         wait2.countDown();
     }
     
@@ -132,7 +153,7 @@ public class Main {
             
             public void actionPerformed(ActionEvent e) {
         window.dispose();
-        shit.setReturned(false);
+        restart.setReturned(false);
         wait2.countDown();
     }
             
@@ -145,8 +166,9 @@ public class Main {
             System.out.println("Caught");
         }
         System.out.println("Returned");
-        System.out.println(shit.returned);
-        return shit.returned;
+        System.out.println(restart.returned);
+        getSettings().startMenu.setGameGoing(true);
+        return restart.returned;
     }
     
 	/**
@@ -192,7 +214,11 @@ public class Main {
         }
         
         int dead = 0;
+        int winnerNumber = 0;
+        Color winnerColor = Color.RED;
+       
         // Main game loop
+        int delay = 0;
         while (settings.getGameGoing()) {
             dead = 0;
             for (int i = 0; i < players; i++) {
@@ -203,15 +229,25 @@ public class Main {
                 	dead++;
                 }
             }
+            if (delay == 0) {
+                delay = 1;
+                stop(2000);
+            }
+            
             if (dead >= (players - 1)) {
                 settings.setGameGoing(false);
                 for (int i = 0; i < players; i++) {
                 	System.out.println("Player "+ (i+1) + " FINAL SCORE: " + drivers[i].getScore());
+                    if (drivers[i].getAlive()) {
+                        winnerNumber = i+1;
+                        winnerColor = drivers[i].getPlayerColor();
+                    }
                 }
             }
             map.repaintGame();
             stop(settings.getDifficulty());
         }
+       
         map.gameOver();
         String fileName = "scores.txt";
         PrintWriter out = null;
@@ -225,13 +261,15 @@ public class Main {
                 out.println();
             }
         }
+        
         catch (IOException e) {
             System.out.println("ERROR: No scores.txt found");
         }
+        
         out.close();
         stop(1000);
         map.disposeWindow();
-        return restartGame(Color.RED);
+        return restartGame(winnerColor, winnerNumber);
         
         
     }
@@ -257,5 +295,9 @@ public class Main {
      */
     public void stopGame() {
         settings.setGameGoing(false);
+    }
+    
+    public Settings getSettings(){
+        return settings;
     }
 }
