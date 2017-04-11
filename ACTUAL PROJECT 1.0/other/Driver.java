@@ -4,63 +4,35 @@ import java.util.Random;
 
 public class Driver {
     
-    /**
-     * X coordinate that will change as the player moves
-     */
     private int xCoordinate = 0;
-    
-    /**
-     * Y coordinate that will change as the player moves
-     */
     private int yCoordinate = 0;
-    
-    /**
-     * X Coordinate that stays constant for a player
-     */
     private int defaultXCoordinate = 0;
-    
-    /**
-     * Y Coordinate that stays constant for a player
-     */
     private int defaultYCoordinate = 0;
-    
-    /**
-     * Inital direction of all players
-     */
     private String DEFAULT_DIRECTION = "down";
-    
-    /**
-     * Condition of player
-     */
     private boolean alive = true;
-    
-    /**
-     * Dynamic direction of players
-     */
     private String direction = "down";
-    
-    /**
-     * The direction of the players one cell before
-     */
     private String oldDirection = "";
-    
-    /**
-     * Color of the players
-     */
     private Color playerColor = Color.YELLOW;
-    
-    /**
-     * Score that increases with time
-     */
+    private Color defaultColor = Color.YELLOW;
     private int score = 0;
-    
-    /**
-     * An instance of the main object
-     */
     private Main main;
+    private boolean boost = false;
+    private int boostCount = 0;
+    
+/*    /**
+     * Initializes player one
+     *
+     * @param x - X Coordinate of the wanted cell
+     * @param y - Y Coordinate of the wanted cell
+     * @param color - Color of the player
+    private Driver(int x, int y, Color color, Main initMain) {
+        this(x, y, color, initMain, DEFAULT_DIRECTION);
+    } 
+    
+*/
     
     /** 
-     * Initializes the player's start up position
+     * Initializes any extra players past player one
      *
      * @param x - X Coordinate of the wanted cell
      * @param y - Y Coordinate of the wanted cell
@@ -68,26 +40,21 @@ public class Driver {
      * @param initDirection - Initial Direction of the other players
      */
      public Driver(int x, int y, Color color, String initDirection) {
-         xCoordinate = x;
-         defaultXCoordinate = x;
-         yCoordinate = y;
-         defaultYCoordinate = y;
-         playerColor = color;
-         direction = initDirection;
+        xCoordinate = x;
+        defaultXCoordinate = x;
+        yCoordinate = y;
+        defaultYCoordinate = y;
+        playerColor = color;
+        defaultColor = color;
+        direction = initDirection;
      }
      
-    /**
-     * Resets the players to their original positions
-     */
     public void resetDriver() {
         xCoordinate = defaultXCoordinate;
         yCoordinate = defaultYCoordinate;
         alive = true;
     }
     
-    /**
-     * Sets the main instance to the one provided
-     */
     public void setMain(Main initMain) {
         main = initMain;
     }
@@ -102,8 +69,6 @@ public class Driver {
     
     /**
      * Getter for the X Coordinate
-     *
-     * @return returns the player's x position
      */
     public int getXCoordinate() {
         return xCoordinate;
@@ -111,8 +76,6 @@ public class Driver {
     
     /**
      * Getter for the Y Coordinate
-     *
-     * @return returns the player's x position
      */
     public int getYCoordinate() {
         return yCoordinate;
@@ -158,55 +121,75 @@ public class Driver {
         
         Color nextColor = Color.YELLOW;
         
-        //Tries to see if the next cell is available to move into
+        /**
+         * Tries to see if the next cell is available to move into
+         */
         try {
             nextColor = main.getCell(newX, newY).getColor();
         }
         catch (Exception IndexOutOfBounds) {}
-        finally {}
         
-        // Checks next cell and moves if possible
-        Random rand = new Random();
-        float r = rand.nextFloat();
-        float g = rand.nextFloat();
-        float b = rand.nextFloat();
-        Color randomColor = new Color(r, g, b);
+        /** 
+         * If the next cell is available to move into then the cell is updated
+         * to show player movement
+         */
        
-        if (nextColor.equals(Color.BLACK)) {
+       
+       
+       if (boost) {
+           try {
+               xCoordinate = newX;
+               yCoordinate = newY;
+               oldDirection = direction;
+               score = score + 1;
+               Random rand = new Random();
+               float r = rand.nextFloat();
+               float g = rand.nextFloat();
+               float b = rand.nextFloat();
+               Color randomColor = new Color(r, g, b);
+               playerColor = randomColor;
+               boostCount++;
+               if (boostCount > 30) {
+                   if (boostCount % 2 == 1)
+                       playerColor = defaultColor;
+                   if (boostCount % 2 == 0)
+                       playerColor = new Color (45,45,45);
+               }
+               main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
+                   
+           }
+           catch (Exception IndexOutOfBounds) {
+               alive = false;
+           }
+           
+       }
+       else if(nextColor.equals(Color.BLUE)) {
+            boost = true;
+            boostCount = 0;
+            xCoordinate = newX;
+            yCoordinate = newY;
+        }
+       
+       else if (nextColor.equals(Color.BLACK)) {
             xCoordinate = newX;
             yCoordinate = newY;
             oldDirection = direction;
             score = score + 1;
             main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
-        }
+       }
+       
+       else {
+           alive = false;
+       }
         
-        // This is for the power up. Power up should last 5 seconds but this
-        // is nowhere near complete yet
-        /**
-        else if(nextColor.equals(Color.BLUE)) {
-            long t= System.currentTimeMillis();
-            long end = t+4000;
-            while(System.currentTimeMillis() < end) {
-                xCoordinate = newX;     
-                yCoordinate = newY;
-                oldDirection = direction;
-                Main.getCell(xCoordinate, yCoordinate).colorUpdate(playerColor);
-                playerColor = randomColor;
-       
+        if (boostCount == 45) {
+            boost = false;
         }
-               
-        }
-        */      
-       
-        else{ 
-            alive = false;
-        }
+         
     }
     
     /**
      * Getter for if the player is alive
-     *
-     * @return whether or not the player is alive
      */
      public boolean getAlive() {
         return alive;
@@ -214,12 +197,17 @@ public class Driver {
      
     /**
      * Getter for player score
-     *
-     * @return score of player
      */
      public int getScore() {
     	 return score;
      }
+    
+    /**
+     * Gets player color
+     */
+    public Color getPlayerColor() {
+        return defaultColor;
+    }
     
     /** 
      * Setter for the direction
@@ -233,8 +221,6 @@ public class Driver {
     
     /**
      * Getter for the direction
-     *
-     * @return direction of player
      */
     public String getDirection() {
         return direction;
@@ -258,5 +244,4 @@ public class Driver {
             reversed = "right";
         return reversed;
     }
-    
 }
