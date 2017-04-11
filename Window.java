@@ -1,8 +1,20 @@
+package graphics;
+
 import javax.swing.JFrame;
+
+import logic.Main;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Color;
+
 public class Window extends JFrame implements KeyListener {
+    
+    private Main main;
+    
+    public Window(int width, int height, String name) {
+        this(width, height, name, null);
+    }
 
     /**
      * Creates a window and adds a key listener for keyboard events.
@@ -11,9 +23,10 @@ public class Window extends JFrame implements KeyListener {
      * @param height Height of the window
      * @param name Name of the window
      */
-    public Window(int width, int height, String name) {
-
-        // Calls initialize function
+    public Window(int width, int height, String name, Main initMain) {
+        
+        main = initMain;
+        
         initialize(width, height, name);
 
         // Uses the key listener and key events to move the object on the grid
@@ -31,28 +44,28 @@ public class Window extends JFrame implements KeyListener {
         // PLAYER 1
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
             try {
-                Main.getDriver(0).setDirection("right");
+                main.getDriver(0).setDirection("right");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_LEFT) {
             try {
-                Main.getDriver(0).setDirection("left");
+                main.getDriver(0).setDirection("left");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
             try {
-                Main.getDriver(0).setDirection("down");
+                main.getDriver(0).setDirection("down");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_UP) {
             try {
-                Main.getDriver(0).setDirection("up");
+                main.getDriver(0).setDirection("up");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
@@ -61,28 +74,28 @@ public class Window extends JFrame implements KeyListener {
         // PLAYER 2
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             try {
-                Main.getDriver(1).setDirection("right");
+                main.getDriver(1).setDirection("right");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             try {
-                Main.getDriver(1).setDirection("left");
+                main.getDriver(1).setDirection("left");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             try {
-                Main.getDriver(1).setDirection("down");
+                main.getDriver(1).setDirection("down");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_W) {
             try {
-                Main.getDriver(1).setDirection("up");
+                main.getDriver(1).setDirection("up");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
@@ -91,28 +104,28 @@ public class Window extends JFrame implements KeyListener {
         // PLAYER 3
         else if (event.getKeyCode() == KeyEvent.VK_K) {
             try {
-                Main.getDriver(2).setDirection("right");
+                main.getDriver(2).setDirection("right");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_H) {
             try {
-                Main.getDriver(2).setDirection("left");
+                main.getDriver(2).setDirection("left");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_J) {
             try {
-                Main.getDriver(2).setDirection("down");
+                main.getDriver(2).setDirection("down");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_U) {
             try {
-                Main.getDriver(2).setDirection("up");
+                main.getDriver(2).setDirection("up");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
@@ -121,28 +134,28 @@ public class Window extends JFrame implements KeyListener {
         // PLAYER 4
         else if (event.getKeyCode() == KeyEvent.VK_NUMPAD6) {
             try {
-                Main.getDriver(3).setDirection("right");
+                main.getDriver(3).setDirection("right");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_NUMPAD4) {
             try {
-                Main.getDriver(3).setDirection("left");
+                main.getDriver(3).setDirection("left");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_NUMPAD5) {
             try {
-                Main.getDriver(3).setDirection("down");
+                main.getDriver(3).setDirection("down");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
 
         else if (event.getKeyCode() == KeyEvent.VK_NUMPAD8) {
             try {
-                Main.getDriver(3).setDirection("up");
+                main.getDriver(3).setDirection("up");
             }
             catch(ArrayIndexOutOfBoundsException exception) {}
         }
@@ -166,18 +179,13 @@ public class Window extends JFrame implements KeyListener {
         // Makes it so that the X button, when pressed, exits the window
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Sets window size to the specified width and height
+        // Sets window characteristics
         setSize(width, height);
-
-        // Makes frame visible
         getContentPane().setBackground(Color.BLACK);
         setVisible(false);
-
-        // Sets window name
         setName(name);
         setTitle(name);
 
     }
 
 }
-

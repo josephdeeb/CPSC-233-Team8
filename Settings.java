@@ -1,17 +1,29 @@
+package logic;
+
 import java.awt.*;
+import java.awt.event.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.event.*;
+
+import graphics.ButtonCreator;
+import graphics.Window;
 
 public class Settings {
     
-    private static boolean boostBool = true;
-    private static int numOfPlayers = 2;
-    private static int numOfPlayersText = 1;
-    private static int difficultySpeed = 100;
-    private static boolean gameGoing = false;
-    private static boolean timer = true;
-    private static StartMenu startMenu = new StartMenu();
+    private boolean boostBool = true;
+    private int numOfPlayers = 2;
+    private int numOfPlayersText = 1;
+    private int difficultySpeed = 100;
+    private boolean gameGoing = false;
+    private boolean timer = true;
+    public StartMenu startMenu;
+    public Main main;
+    
+    public Settings(Main initMain) {
+        main = initMain;
+        startMenu = new StartMenu(this);
+    }
     
     /** 
      * Runs the Settings menu
@@ -20,7 +32,7 @@ public class Settings {
      * @param height Sets the height of the window
      * @param name Sets the name of the window
      */
-    public static void run(int w,int h, String name){
+    public void run(int w,int h, String name){
         
         // Creates a new window
         Window frame = new Window(w, h, name);
@@ -35,7 +47,7 @@ public class Settings {
         // Initializes the title for settings
         JPanel panel = (JPanel) frame.getContentPane();
         panel.setLayout(null);
-        JLabel img = new JLabel(new ImageIcon("bin/SETTINGS.png"));
+        JLabel img = new JLabel(new ImageIcon("assets/SETTINGS.png"));
         panel.add(img);
         Dimension size = img.getMaximumSize();
         img.setBounds(170, 40, size.width, size.height);
@@ -144,6 +156,20 @@ public class Settings {
     }
     
     /**
+    * Setter method for Players
+    *
+    * @param number passes in setter for players
+    */
+    public void setPlayers(int number) {
+        if (number < 1)
+            numOfPlayers = 1;
+        if (number > 4)
+            numOfPlayers = 4;
+        else
+            numOfPlayers = number;
+    }
+    
+    /**
      * Getter for the boost boolean
     */
     public boolean getBoost() {
@@ -180,4 +206,13 @@ public class Settings {
 	    gameGoing = setter;
 	}
     
+    /**
+    * Setter method for the timer
+    *
+    * @param time passes in setter for setTimer
+    */
+    public void setTimer(boolean time){
+        timer = time;
+    }
+
 }

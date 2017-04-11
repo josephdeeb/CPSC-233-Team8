@@ -1,32 +1,43 @@
+package graphics;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Random;
 
+import logic.Main;
+
 import javax.swing.JPanel;
 
 public class Map {
-    private static final String DEFAULT_WINDOW_NAME = "T R O M";
-    private static final int DEFAULT_WINDOW_WIDTH = 900;
-    private static final int DEFAULT_WINDOW_HEIGHT = 900;
+    
+    public static final String DEFAULT_WINDOW_NAME = "T R O M";
+    public static final int DEFAULT_WINDOW_WIDTH = 900;
+    public static final int DEFAULT_WINDOW_HEIGHT = 900;
     private Cell[][] labels = new Cell[50][50];
-    private Window window;
+    public Window window;
     private JPanel game;
+    private Main main;
     
-    public Map() {
-        this(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
+    public Map(Main initMain) {
+        this(initMain, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, DEFAULT_WINDOW_NAME);
     }
     
-    public Map(String n) {
-        this(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, n);
+    public Map(Main initMain, String n) {
+        this(initMain, DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, n);
     }
     
-    public Map(int width, int height, String n) {
+    public Map(Main initMain, int width, int height, String n) {
+        main = initMain;
         initialize(width, height, n);
+    }
+    
+    public void disposeWindow() {
+        window.dispose();
     }
     
     private void initialize(int w, int h, String name) {
         
-        window = new Window(w, h, name);
+        window = new Window(w, h, name, main);
 
         game = new JPanel(new GridLayout(50, 50));
         
@@ -52,7 +63,7 @@ public class Map {
     }
     
     public void gameOver() {
-        drawBox(11,15);
+        drawBox(11, 15);
         game(13, 17);
         over(13, 25);
     }
@@ -85,7 +96,12 @@ public class Map {
         }
     }
     
-    // P.S this ain't needed, draw line works for boxes if you specify the right coordinates
+    /** 
+     * Draws a box for the game over to be placed
+     * 
+     * @param x The starting x coordinate
+     * @param y The starting y coordinate
+     */
     private void drawBox(int x, int y){
         //starting x: 11 starting y: 15
         for(int a=y; a<34; a++){
