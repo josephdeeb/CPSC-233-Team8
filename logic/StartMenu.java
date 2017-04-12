@@ -101,16 +101,16 @@ public class StartMenu{
         JLabel img = new JLabel(new ImageIcon("assets/INSTRUCTIONS.png"));
         panel.add(img);
         Dimension size = img.getMaximumSize();
-        img.setBounds(170, 60, size.width, size.height);
+        img.setBounds(170, 40, size.width, size.height);
         
         JPanel namesPanel = new JPanel();
-        JLabel textLabel = new JLabel("<html><br><br><br>Player 1- Up-&#8593; Left-&#8592; Down-&#8595 Right-&#8594<br><br>Player 2- Up-W Left-A Down-S Right-D<br><br>Player 3- Up-U Left-H Down-J Right-K </html>");
+        JLabel textLabel = new JLabel("<html><br><br><br>Player 1- Up-&#8593; Left-&#8592; Down-&#8595 Right-&#8594<br><br>Player 2- Up-W Left-A Down-S Right-D<br><br>Player 3- Up-U Left-H Down-J Right-K <br><br>Player 4- Up-8 Left-4 Down-5 Right-6 </html>");
         textLabel.setFont(new Font("Serif", Font.ITALIC, 30));
         textLabel.setForeground(Color.WHITE);
         namesPanel.setBackground(Color.BLACK);
         namesPanel.add(textLabel);
-        namesPanel.setSize(600,600);
-        namesPanel.setLocation(100,200);
+        namesPanel.setSize(600,500);
+        namesPanel.setLocation(100,150);
         namesPanel.setVisible(true);
         textLabel.setVisible(true);
         
