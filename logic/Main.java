@@ -252,7 +252,17 @@ public class Main {
             }
             if (delay == 0) {
                 delay = 1;
-                stop(2000);
+                map.iniPos(players,Color.WHITE);
+                map.drawThree(Color.WHITE);
+                stop(1000);
+                map.drawThree(Color.BLACK);
+                map.drawTwo(Color.WHITE);
+                stop(1000);
+                map.drawTwo(Color.BLACK);
+                map.drawOne(Color.WHITE);
+                stop(1000);
+                map.drawOne(Color.BLACK);
+                map.iniPos(players,Color.BLACK);
             }
             
             // Prints the final scores to the console and ends the game
