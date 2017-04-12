@@ -62,6 +62,73 @@ public class Map {
         game.repaint();
     }
     
+    public void iniPos(int players,Color color){
+        
+        //Player 1
+        int xa=8;
+        int ya=4;
+        labels[xa][ya].colorUpdate(color);
+        drawLine(xa+1,xa+1,ya,ya+4,color);
+        drawLine(xa,xa+2,ya+4,ya+4,color);
+        
+        //Player 2
+        int xb=38;
+        int yb=4;
+        drawLine(xb,xb+2,yb,yb,color);
+        drawLine(xb,xb+2,yb+2,yb+2,color);
+        drawLine(xb,xb+2,yb+4,yb+4,color);
+        labels[xb+2][yb+1].colorUpdate(color);
+        labels[xb][yb+3].colorUpdate(color);
+        
+        if(players>=3){
+            //Player 3
+            int xc=39;
+            int yc=41;
+            drawLine(xc,xc+2,yc,yc,color);
+            drawLine(xc,xc+2,yc+2,yc+2,color);
+            drawLine(xc,xc+2,yc+4,yc+4,color);
+            labels[xc+2][yc+1].colorUpdate(color);
+            labels[xc+2][yc+3].colorUpdate(color);
+            
+            if(players>=4){
+                //Player 4
+                int xd=9;
+                int yd=42;
+                drawLine(xd,xd,yd,yd+2,color);
+                drawLine(xd+2,xd+2,yd,yd+4,color);
+                labels[xd+1][yd+2].colorUpdate(color);
+            }
+        }
+    }
+    
+    public void drawThree(Color color){
+        int x=18;
+        int y=16;
+        drawLine(x,x+14,y,y,color);
+        drawLine(x,x+14,y+8,y+8,color);
+        drawLine(x,x+14,y+16,y+16,color);
+        drawLine(x+14,x+14,y+1,y+7,color);
+        drawLine(x+14,x+14,y+9,y+15,color);
+    }
+    
+    public void drawTwo(Color color){
+        int x=18;
+        int y=16;
+        drawLine(x,x+14,y,y,color);
+        drawLine(x,x+14,y+8,y+8,color);
+        drawLine(x,x+14,y+16,y+16,color);
+        drawLine(x+14,x+14,y+1,y+7,color);
+        drawLine(x,x,y+9,y+15,color);
+    }
+   
+    public void drawOne(Color color){
+        int x=18;
+        int y=16;
+        drawLine(x+3,x+7,y,y,color);
+        drawLine(x,x+14,y+16,y+16,color);
+        drawLine(x+7,x+7,y,y+15,color);
+    }
+    
     public void gameOver() {
         drawBox(11, 15);
         game(13, 17);
